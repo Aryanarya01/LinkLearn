@@ -1,3 +1,4 @@
+import Profile from "../models/profile.model";
 import User from "../models/user.model";
 import bcrypt from "bcrypt"
 
@@ -20,7 +21,8 @@ export const register = async (req,res)=>{
             email,
             password : hashedPassword,
         })
-        await newUser.save();
+        const profile = new Profile({userId : newUser._id})
+        await profile.save();
         return res.status(200).json({message : "User Registered Successfully"})
 
     }catch(err){
