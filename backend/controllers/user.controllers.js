@@ -116,3 +116,21 @@ export const getUserAndProfile = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+
+
+export const updateProfileData = async(req,res)=>{
+  try{
+    const Id = req.user.id;
+    const{...newProfileData} = req.body;
+    const userProfile = await User.findById(Id);
+    if(!userProfile){
+      return res.status(400).json({message : "User not found!"});
+    }
+    const Profle_to_update = await Profile.findOne({userId : userProfile.id});
+    Object.assign(Profle_to_update,newProfileData);
+    await Profle_to_update.save();
+    res.status(200).json({message : "Profile Updated!"})
+  }catch(err){
+    return res.status(500).json({message :err.message});
+  }
+}
