@@ -65,8 +65,12 @@ export const login = async (req, res) => {
 
 export const uploadUserProfile = async (req, res) => {
   try {
-     
-  } catch (err) {
+     const userId = req.user.id;
+    const user = await User.findById(userId);
+    if(!user){
+      
+    }
+    } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 };
