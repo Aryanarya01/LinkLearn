@@ -134,3 +134,12 @@ export const updateProfileData = async(req,res)=>{
     return res.status(500).json({message :err.message});
   }
 }
+
+
+export const getAllUserProfile = async(req,res)=>{
+  try{
+
+  }catch(err){
+    return res.status(500).json({message : err.message})
+  }
+}
