@@ -1,5 +1,5 @@
-import Profile from "../models/profile.model";
-import User from "../models/user.model";
+import Profile from "../models/profile.model.js";
+import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 export const register = async (req, res) => {

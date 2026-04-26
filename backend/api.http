@@ -8,3 +8,14 @@
      "email":"aryan@gmail.com",
     "name":"aryan"
     }
+
+
+###
+
+POST http://localhost:9090/login HTTP/1.1
+Content-Type: application/json
+
+{
+   "email":"aryan@gmail.com",
+   "password":"1234"
+}    
