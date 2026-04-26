@@ -106,7 +106,7 @@ export const getUserAndProfile = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    const userProfile = await Profile.findById({ userId: user.id }).populate(
+    const userProfile = await Profile.findOne({ userId: user._id }).populate(
       "userId",
       "name username email profilePicture",
     );

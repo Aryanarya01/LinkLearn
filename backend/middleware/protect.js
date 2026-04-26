@@ -13,7 +13,9 @@ export const Protect = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ message: "User not found!" });
     }
-    req.user = user;
+  req.user = {
+      id: user._id.toString()
+    };
     next();
   } catch (err) {
     return res.status(500).json({ message: "Server Error" });
