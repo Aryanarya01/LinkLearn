@@ -4,6 +4,7 @@ import User from "../models/user.model.js";
 export const Protect = async (req, res, next) => {
   try {
     const token = req.cookies.token;
+    console.log("TOKEN:", req.cookies.token);
     if (!token) {
       return res.status(404).json({ message: "Not Authorized" });
     }
