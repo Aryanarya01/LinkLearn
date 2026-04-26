@@ -1,7 +1,7 @@
 import Profile from "../models/profile.model";
 import User from "../models/user.model";
 import bcrypt from "bcrypt"
-
+import crypto from "crypto"
 export const register = async (req,res)=>{
     try{
         const {name, email, username, password} = req.body;
@@ -45,7 +45,9 @@ export const login = async(req,res)=>{
             return res.status(404).json({message : "Authentication Error!"});
         }
 
-        const token = 
+        const token = crypto.randomBytes(32).toString("hex");
+        await User.updateOne({_id : user._id},{token});
+        return res.status(200).json({token});
     }catch(err){
         return res.status(500).json({message : "Server error!"});
     }
