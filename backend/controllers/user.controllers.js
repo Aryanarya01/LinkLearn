@@ -7,9 +7,14 @@ export const register = async (req,res)=>{
         if(!name||!username||!email||!password){
             return res.status(400).json("All fields are required");
         }
-        const hashedPassword  = await bcrypt.hash(password,"10");
 
-        const newUser = new User.create({
+        const user = await User.findOne({email});
+        if(user){
+            return res.status(400).json({message : "User Already Exists!"});
+        }
+        const hashedPassword  = await bcrypt.hash(password,10);
+
+        const newUser = User.create({
             name ,
             username ,
             email,
