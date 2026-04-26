@@ -138,7 +138,8 @@ export const updateProfileData = async(req,res)=>{
 
 export const getAllUserProfile = async(req,res)=>{
   try{
-
+      const AllProfile = await Profile.find().populate("userId","name username email profilePicture")
+      res.status(200).json({AllProfile})
   }catch(err){
     return res.status(500).json({message : err.message})
   }
