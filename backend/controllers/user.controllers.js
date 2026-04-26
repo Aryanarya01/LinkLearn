@@ -1,5 +1,5 @@
 import User from "../models/user.model";
-
+import bcrypt from "bcrypt"
 
 export const register = async (req,res)=>{
     try{
@@ -7,7 +7,17 @@ export const register = async (req,res)=>{
         if(!name||!username||!email||!password){
             return res.status(400).json("All fields are required");
         }
-        const 
+        const hashedPassword  = await bcrypt.hash(password,"10");
+
+        const newUser = new User.create({
+            name ,
+            username ,
+            email,
+            password : hashedPassword,
+        })
+        await newUser.save();
+        return res.status(200).json({message : "User Registered Successfully"})
+
     }catch(err){
         return res.status(500).json({message : "Server Error!"})
     }
