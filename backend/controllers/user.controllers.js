@@ -2,6 +2,14 @@ import Profile from "../models/profile.model.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
+
+
+
+
+
+
+
+
 export const register = async (req, res) => {
   try {
     const { name, email, username, password } = req.body;
@@ -51,3 +59,12 @@ export const login = async (req, res) => {
     return res.status(500).json({ message: "Server error!" });
   }
 };
+
+
+export const uploadUserProfile = async(req,res)=>{
+  try{
+
+  }catch(err){
+    
+  }
+}
