@@ -3,12 +3,7 @@ import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 
-import jwt from "jsonwebtoken"
-
-
-
-
-
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   try {
@@ -52,27 +47,25 @@ export const login = async (req, res) => {
       return res.status(404).json({ message: "Authentication Error!" });
     }
 
-    const token = jwt.sign({_id : user._id},process.env.JWT_SECRET,{
-      expiresIn : "7d"
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
     });
-     res.cookie("token",token,{
+    res.cookie("token", token, {
       httpOnly: true,
-  secure: isProduction,        // true on deployed, false local
-  sameSite: isProduction ? "none" : "lax",
-  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-  path: "/",
-     })
-    return res.status(200).json({message : "Login Successfull"});
+      secure: isProduction, // true on deployed, false local
+      sameSite: isProduction ? "none" : "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      path: "/",
+    });
+    return res.status(200).json({ message: "Login Successfull" });
   } catch (err) {
     return res.status(500).json({ message: "Server error!" });
   }
 };
 
-
-export const uploadUserProfile = async(req,res)=>{
-  try{
-     
-  }catch(err){
-      return res.status(500).json({message :err.message})
+export const uploadUserProfile = async (req, res) => {
+  try {
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
   }
-}
+};
