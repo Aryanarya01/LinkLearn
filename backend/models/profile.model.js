@@ -15,7 +15,20 @@ const workSchema = new mongoose.Schema({
     }
 });
 
-
+const educationSchema = new mongoose.Schema({
+    school : {
+        type : String,
+        default : "",
+    },
+    degree : {
+        type : String,
+        default : ""
+    },
+    fieldOfStudy : {
+        type : String,
+        default : ""
+    }
+})
 
 const profileSchema = new mongoose.Schema({
     userId : {
