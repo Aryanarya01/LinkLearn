@@ -21,7 +21,16 @@ const converProfleToPdf = async (data)=>{
   doc.fontSize(14).text(`Name : ${data.userId.name}`);
   doc.fontSize(14).text(`Username : ${data.userId.username}`);
   doc.fontSize(14).text(`Email : ${data.userId.email}`);
-  doc.fontSize(14).text( )
+  doc.fontSize(14).text(`Bio : ${data.bio}`);
+    doc.fontSize(14).text(`CurrentPost : ${data.currentPost}`);
+  doc.fontSize(14).text("Past Work :");
+  userData.pastWork.forEach((work, index) => {
+    doc.fontSize(14).text(`Company Name : ${work.company}`);
+    doc.fontSize(14).text(`Position : ${work.position}`);
+    doc.fontSize(14).text(`Years : ${work.years}`);
+  });
+  doc.end();
+  return outputPath;
 }
 
 export const register = async (req, res) => {
