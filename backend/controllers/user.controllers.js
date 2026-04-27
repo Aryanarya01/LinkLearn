@@ -5,7 +5,7 @@ import crypto from "crypto";
 import PDFDocument from "pdfkit";
 import jwt from "jsonwebtoken";
 import fs from "fs";
-import { Connection } from "../models/connection.model.js";
+import Connection from "../models/connection.model.js";
 
 const convertProfileToPdf = async (data) => {
   const doc = new PDFDocument();
@@ -198,7 +198,7 @@ export const sendConnectionRequest = async (req,res)=>{
     if(!user){
       return res.status(400).json({message : "User not found~!"})
     }
-    const targetUser = await User.findOne({__id : connectionId});
+    const targetUser = await User.findOne({_id : connectionId});
     if(!targetUser){
       return res.status(404).json({message : "Targeted User not found!"});
     }
@@ -209,10 +209,12 @@ export const sendConnectionRequest = async (req,res)=>{
     if(existingRequest){
       return res.status(400).json({message : "Request Already Sent!"});
     }
-    const newRequest = await new Connection({
+    const newRequest =  new Connection({
       userId : user._id,
     connectionId : targetUser._id,
     })
+    await newRequest.save();
+    res.status(200).json({message : "Request send!"})
   }catch(err){
     return res.status(500).json({message : err.message})
   }

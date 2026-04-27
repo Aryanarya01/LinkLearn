@@ -1,4 +1,4 @@
-import mongoose, { connection } from "mongoose";
+import mongoose from "mongoose";
 
 const connectionSchema = new mongoose.Schema({
   userId: {
@@ -16,4 +16,4 @@ const connectionSchema = new mongoose.Schema({
 });
 
 const Connection = mongoose.model("Connection", connectionSchema);
-export const Connection;
+export default Connection;
