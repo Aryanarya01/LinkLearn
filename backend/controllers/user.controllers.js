@@ -246,7 +246,15 @@ export const getMyConnections = async(req,res)=>{
 
 export const whatAreMyConnections = async(req,res)=>{
   try{
-    
+      const Id = req.user.id;
+      const user = await User.findById(Id);
+      if(!user){
+        return res.status(404).json({message : "User not found!"});
+      }
+      const myConnection = await Connection.find({
+        connectionId : Id,
+      }).populate("userId","name email username profilePicture");
+      return res.status(200).json({myConnection})
   }catch(err){
     return res.status(500).json({message : err.message})
   }
