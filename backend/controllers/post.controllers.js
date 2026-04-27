@@ -103,7 +103,15 @@ export const get_comments_by_post = async (req, res) => {
 
 export const delete_comment_of_user = async(req,res)=>{
   try{
-
+    const Id = req.user.id;
+    const {comment_id} = req.body;
+    const comment = await Comment.findOne({_id : comment_id});
+    if(!comment){
+      return res.status(500).json({message : "Comment Not found!"});
+    }
+    if(Comment.userId.toString()!== Id){
+      return res.status
+    }
   }catch(err){
     return res.status(500).json({message : err.message})
   }
