@@ -2,15 +2,14 @@ import Profile from "../models/profile.model.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
-import PDFDocument from "pdfkit"
+import PDFDocument from "pdfkit";
 import jwt from "jsonwebtoken";
 import fs from "fs";
 
-
-const convertProfileToPdf = async (data)=>{
+const convertProfileToPdf = async (data) => {
   const doc = new PDFDocument();
-  const outputPath = crypto.randomBytes(32).toString("hex") +  ".pdf";
-    const stream = fs.createWriteStream("uploads/" + outputPath);
+  const outputPath = crypto.randomBytes(32).toString("hex") + ".pdf";
+  const stream = fs.createWriteStream("uploads/" + outputPath);
   doc.pipe(stream);
 
   doc.image(`uploads/${data.userId.profilePicture}`, {
@@ -22,7 +21,7 @@ const convertProfileToPdf = async (data)=>{
   doc.fontSize(14).text(`Username : ${data.userId.username}`);
   doc.fontSize(14).text(`Email : ${data.userId.email}`);
   doc.fontSize(14).text(`Bio : ${data.bio}`);
-    doc.fontSize(14).text(`CurrentPost : ${data.currentPost}`);
+  doc.fontSize(14).text(`CurrentPost : ${data.currentPost}`);
   doc.fontSize(14).text("Past Work :");
   data.pastWork.forEach((work, index) => {
     doc.fontSize(14).text(`Company Name : ${work.company}`);
@@ -31,7 +30,7 @@ const convertProfileToPdf = async (data)=>{
   });
   doc.end();
   return outputPath;
-}
+};
 
 export const register = async (req, res) => {
   try {
@@ -175,15 +174,16 @@ export const getAllUserProfile = async (req, res) => {
   }
 };
 
-
-
-export const downloadProfile = async (req,res)=>{
-  try{
+export const downloadProfile = async (req, res) => {
+  try {
     const Id = req.user.id;
-  const profile = await Profile.findOne({userId : Id}).populate("userId","name email username profilePicture")
-  const outputPath = await convertProfileToPdf(profile)
-  return res.status(200).json({message : outputPath})
-  }catch(err){
-    return res.status(500).json({message :err.message})
+    const profile = await Profile.findOne({ userId: Id }).populate(
+      "userId",
+      "name email username profilePicture",
+    );
+    const outputPath = await convertProfileToPdf(profile);
+    return res.status(200).json({ message: outputPath });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
   }
-}
+};
