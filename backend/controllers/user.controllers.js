@@ -145,3 +145,12 @@ export const getAllUserProfile = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+
+
+
+export const downloadProfile = async (req,res)=>{
+  const Id = req.user.id;
+  const profile = await Profile.findOne({userId : Id}).populate("userId","name email username profilePicture")
+  const outputPath = await converProfleToPdf(profile)
+  res.status(200).json(profile)
+}
