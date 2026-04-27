@@ -31,3 +31,6 @@ const postSchema = new mongoose.Schema({
         default : '',
     }
 })
+
+const Post = mongoose.model("Post",postSchema);
+expor
