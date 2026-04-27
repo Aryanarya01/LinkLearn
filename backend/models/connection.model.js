@@ -2,11 +2,11 @@ import mongoose, { connection } from "mongoose";
 
 
 const connectionSchema = new mongoose.Schema({
-    connectionId : {
+     userId : {
         type : mongoose.Schema.Types.ObjectId,
         ref : "User",
     },
-    userId : {
+    connectionId : {
         type : mongoose.Schema.Types.ObjectId,
         ref : "User",
     },
