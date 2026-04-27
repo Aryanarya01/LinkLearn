@@ -206,6 +206,13 @@ export const sendConnectionRequest = async (req,res)=>{
     userId : user._id,
     connectionId : targetUser._id,
   })
+    if(existingRequest){
+      return res.status(400).json({message : "Request Already Sent!"});
+    }
+    const newRequest = await new Connection({
+      userId : user._id,
+    connectionId : targetUser._id,
+    })
   }catch(err){
     return res.status(500).json({message : err.message})
   }
