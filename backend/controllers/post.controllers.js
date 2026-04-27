@@ -121,7 +121,9 @@ export const delete_comment_of_user = async (req, res) => {
 
 export const incrLikes = async(req,res)=>{
   try{
-
+    const {post_id} = req.body;
+    const post = await Posts.findById(post_id);
+    if()
   }catch(err){
     return res.status(500).json({message : err.message})
   }
