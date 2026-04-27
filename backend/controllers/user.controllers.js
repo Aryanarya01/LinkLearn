@@ -202,6 +202,9 @@ export const sendConnectionRequest = async (req,res)=>{
     if(!targetUser){
       return res.status(404).json({message : "Targeted User not found!"});
     }
+      if (Id === connectionId) {
+      return res.status(400).json({ message: "You can't connect with yourself!" });
+    }
   const existingRequest = await Connection.findOne({
     userId : user._id,
     connectionId : targetUser._id,
