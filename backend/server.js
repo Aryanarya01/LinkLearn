@@ -10,6 +10,7 @@ const app = express();
 const port = 9090;
  
 app.use(express.json());
+app.use(express.static("uploads"));
 app.use(cors())
 app.use(cookieParser())
 app.use(userRouter)

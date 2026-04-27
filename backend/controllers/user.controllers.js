@@ -9,7 +9,7 @@ import fs from "fs";
 
 const convertProfileToPdf = async (data)=>{
   const doc = new PDFDocument();
-  const outputPath = crypto.randomBytes(32).toString("hex")
+  const outputPath = crypto.randomBytes(32).toString("hex") +  ".pdf";
     const stream = fs.createWriteStream("uploads/" + outputPath);
   doc.pipe(stream);
 
@@ -24,7 +24,7 @@ const convertProfileToPdf = async (data)=>{
   doc.fontSize(14).text(`Bio : ${data.bio}`);
     doc.fontSize(14).text(`CurrentPost : ${data.currentPost}`);
   doc.fontSize(14).text("Past Work :");
-  userData.pastWork.forEach((work, index) => {
+  data.pastWork.forEach((work, index) => {
     doc.fontSize(14).text(`Company Name : ${work.company}`);
     doc.fontSize(14).text(`Position : ${work.position}`);
     doc.fontSize(14).text(`Years : ${work.years}`);
