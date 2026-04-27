@@ -228,7 +228,12 @@ export const sendConnectionRequest = async (req,res)=>{
 //  maine kise bje hai
 export const getMyConnections = async(req,res)=>{
   try{
-    
+      const Id = req.user.id;
+      const user = await User.findById(Id);
+      if(!user){
+        return res.status(404).json({message : "User not found!"});
+      }
+      
   }catch(err){
     return res.status(500).json({message :err.message})
   }
