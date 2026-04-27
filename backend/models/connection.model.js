@@ -1,20 +1,19 @@
 import mongoose, { connection } from "mongoose";
 
-
 const connectionSchema = new mongoose.Schema({
-     userId : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "User",
-    },
-    connectionId : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "User",
-    },
-    status_accepted : {
-        type : Boolean,
-        default : null,
-    }
-})
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  connectionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  status_accepted: {
+    type: Boolean,
+    default: null,
+  },
+});
 
-const Connection = mongoose.model("Connection",connectionSchema);
+const Connection = mongoose.model("Connection", connectionSchema);
 export const Connection;
