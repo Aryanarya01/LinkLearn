@@ -233,7 +233,10 @@ export const getMyConnections = async(req,res)=>{
       if(!user){
         return res.status(404).json({message : "User not found!"});
       }
-      
+      const mySendRequests = await Connection.find({
+        userId : Id
+      }).populate("connectionId","name email username profilePicture")
+      res.status(200).json({mySendRequests})
   }catch(err){
     return res.status(500).json({message :err.message})
   }
