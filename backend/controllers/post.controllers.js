@@ -62,23 +62,22 @@ export const deletePost = async (req, res) => {
   }
 };
 
-
-export const commentPost = async(req,res)=>{
-  try{
-      const Id = req.user.id;
-      const {post_id,body} = req.body;
-      const post = await Posts.findById({_id : post_id});
-        if(!post){
-        return req.status(404).json({message : "Post not found!"})
-      }
-      const newComment = new Comment({
-        userId : Id,
-        postId : post_id,
-        body : body,
-      })
-      await newComment.save();
-      return res.status(200).json({message : "Comment updated!"})
-  }catch(err){
-    return res.status(500).json({message : err.message})
+export const commentPost = async (req, res) => {
+  try {
+    const Id = req.user.id;
+    const { post_id, body } = req.body;
+    const post = await Posts.findById({ _id: post_id });
+    if (!post) {
+      return req.status(404).json({ message: "Post not found!" });
+    }
+    const newComment = new Comment({
+      userId: Id,
+      postId: post_id,
+      body: body,
+    });
+    await newComment.save();
+    return res.status(200).json({ message: "Comment updated!" });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
   }
-}
+};
