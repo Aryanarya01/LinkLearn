@@ -260,3 +260,11 @@ export const whatAreMyConnections = async (req, res) => {
 };
 
 
+export const acceptConnectionRequest = async(req,res)=>{
+  try{
+    const Id = req.user.id;
+    
+  }catch(err){
+    return res.status(500).json({message : err.message})
+  }
+}
