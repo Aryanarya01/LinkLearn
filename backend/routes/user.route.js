@@ -11,7 +11,7 @@ router.route("/user_update").post(Protect,updateUserProfile)
 router.route("/get_user_and_Profile").get(Protect,getUserAndProfile)
 router.route("/update_profile_data").post(Protect,updateProfileData)
 router.route("/user/get_all_users").get(Protect,getAllUserProfile)
-route.route("/user/download_resume").get(Protect,downloadProfile)
+router.route("/user/download_resume").get(Protect,downloadProfile)
 
 
 export default router;

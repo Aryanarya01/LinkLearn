@@ -7,13 +7,13 @@ import jwt from "jsonwebtoken";
 
 
 
-const converProfleToPdf = async (data)=>{
+const convertProfileToPdf = async (data)=>{
   const doc = new PDFDocument();
   const outputPath = crypto.randomBytes(32).toString("hex")
     const stream = fs.createWriteStream("uploads/" + outputPath);
   doc.pipe(stream);
 
-  doc.image(`uploads/${userData.userId.profilePicture}`, {
+  doc.image(`uploads/${data.userId.profilePicture}`, {
     align: "center",
     width: 100,
   });
@@ -82,6 +82,7 @@ export const login = async (req, res) => {
       httpOnly: true,
       secure: false, // true on deployed, false local
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      sameSite: "lax",
       path: "/",
     });
     return res.status(200).json({ message: "Login Successfull" });
@@ -180,7 +181,7 @@ export const downloadProfile = async (req,res)=>{
   try{
     const Id = req.user.id;
   const profile = await Profile.findOne({userId : Id}).populate("userId","name email username profilePicture")
-  const outputPath = await converProfleToPdf(profile)
+  const outputPath = await convertProfileToPdf(profile)
   return res.status(200).json({message : outputPath})
   }catch(err){
     return res.status(500).json({message :err.message})
