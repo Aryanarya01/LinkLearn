@@ -227,5 +227,9 @@ export const sendConnectionRequest = async (req,res)=>{
 
 //  maine kise bje hai
 export const getMyConnections = async(req,res)=>{
-  try
+  try{
+    
+  }catch(err){
+    return res.status(500).json({message :err.message})
+  }
 }
