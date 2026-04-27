@@ -89,7 +89,7 @@ export const get_comments_by_post = async(req,res)=>{
       const Id = req.user.id;
       const {post_id} = req.body;
       const post = await Posts.findById({_id : post_id});
-      if()
+      if(!)
   }catch(err){  
     return res.status(500).json({message : err.message});
   }
