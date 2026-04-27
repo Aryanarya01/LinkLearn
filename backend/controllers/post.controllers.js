@@ -66,7 +66,7 @@ export const commentPost = async (req, res) => {
   try {
     const Id = req.user.id;
     const { post_id, body } = req.body;
-    const post = await Posts.findById({ _id: post_id });
+    const post = await Posts.findOne({ _id: post_id });
     if (!post) {
       return req.status(404).json({ message: "Post not found!" });
     }
@@ -88,8 +88,11 @@ export const get_comments_by_post = async(req,res)=>{
   try{
       const Id = req.user.id;
       const {post_id} = req.body;
-      const post = await Posts.findById({_id : post_id});
-      if(!)
+      const post = await Posts.findOne({_id : post_id});
+      if(!post){
+        return res.status(404).json({message : "Post not found!"});
+
+      }
   }catch(err){  
     return res.status(500).json({message : err.message});
   }
