@@ -1,0 +1,14 @@
+import mongoose, { connection } from "mongoose";
+
+
+const connectionSchema = new mongoose.Schema({
+    connectionId : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "User",
+    },
+    userId : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "User",
+    },
+    
+})
