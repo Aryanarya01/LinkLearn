@@ -108,10 +108,10 @@ export const delete_comment_of_user = async (req, res) => {
     if (!comment) {
       return res.status(500).json({ message: "Comment Not found!" });
     }
-    if (Comment.userId.toString() !== Id) {
+    if (comment.userId.toString() !== Id) {
       return res.status(403).json({ message: "Not Authorized" });
     }
-    await comment.deleteOne({ _id: comment_id });
+    await comment.deleteOne();
     return res.status(200).json({ message: "Comment deleted!" });
   } catch (err) {
     return res.status(500).json({ message: err.message });
