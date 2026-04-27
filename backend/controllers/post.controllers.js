@@ -77,7 +77,7 @@ export const commentPost = async(req,res)=>{
         body : body,
       })
       await newComment.save();
-      res.status(200).json({message : "Comment updated!"})
+      return res.status(200).json({message : "Comment updated!"})
   }catch(err){
     return res.status(500).json({message : err.message})
   }
