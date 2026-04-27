@@ -100,21 +100,20 @@ export const get_comments_by_post = async (req, res) => {
   }
 };
 
-
-export const delete_comment_of_user = async(req,res)=>{
-  try{
+export const delete_comment_of_user = async (req, res) => {
+  try {
     const Id = req.user.id;
-    const {comment_id} = req.body;
-    const comment = await Comment.findOne({_id : comment_id});
-    if(!comment){
-      return res.status(500).json({message : "Comment Not found!"});
+    const { comment_id } = req.body;
+    const comment = await Comment.findOne({ _id: comment_id });
+    if (!comment) {
+      return res.status(500).json({ message: "Comment Not found!" });
     }
-    if(Comment.userId.toString()!== Id){
-      return res.status(403).json({message : "Not Authorized"});
+    if (Comment.userId.toString() !== Id) {
+      return res.status(403).json({ message: "Not Authorized" });
     }
-    await comment.deleteOne({_id : comment_id});
-    return res.status(200).json({message :"Comment deleted!"})
-  }catch(err){
-    return res.status(500).json({message : err.message})
+    await comment.deleteOne({ _id: comment_id });
+    return res.status(200).json({ message: "Comment deleted!" });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
   }
-}
+};
