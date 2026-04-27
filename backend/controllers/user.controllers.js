@@ -2,8 +2,27 @@ import Profile from "../models/profile.model.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
-
+import PDFDocument from "pdfkit"
 import jwt from "jsonwebtoken";
+
+
+
+const converProfleToPdf = async (data)=>{
+  const doc = new PDFDocument();
+  const outputPath = crypto.randomBytes(32).toString("hex")
+    const stream = fs.createWriteStream("uploads/" + outputPath);
+  doc.pipe(stream);
+
+  doc.image(`uploads/${userData.userId.profilePicture}`, {
+    align: "center",
+    width: 100,
+  });
+
+  doc.fontSize(14).text(`Name : ${data.userId.name}`);
+  doc.fontSize(14).text(`Username : ${data.userId.username}`);
+  doc.fontSize(14).text(`Email : ${data.userId.email}`);
+  doc.fontSize(14).text( )
+}
 
 export const register = async (req, res) => {
   try {
