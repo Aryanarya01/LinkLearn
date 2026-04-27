@@ -52,9 +52,9 @@ export const deletePost = async (req, res) => {
       return res.status(404).json({ message: "Post not found!" });
     }
     if (postToDelete.userId.toString() !== Id) {
-      return res.status(400).json({ message: "Not Authorized!" });
+      return res.status(403 ).json({ message: "Not Authorized!" });
     }
-    await postToDelete.deleteOne({ _id: post_id });
+    await postToDelete.findByIdAndDelete(post_id);
     return res.status(200).json({ message: "Post Deleted!" });
   } catch (err) {
     return res.status(500).json({ message: err.message });
