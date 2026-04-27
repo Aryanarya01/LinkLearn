@@ -79,4 +79,6 @@ Content-Type: application/json
 GET http://localhost:9090/user/get_all_users HTTP/1.1
 Content-Type: application/json
 
- 
+###
+ GET http://localhost:9090/user/download_resume HTTP/1.1
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZWU0ZmZiZTYzMDlhYjMxYWMzY2EwOCIsImlhdCI6MTc3NzI4NzQ0MywiZXhwIjoxNzc3ODkyMjQzfQ.q9FUn90szandh64X2NL561eJg8UP7Q5Y3lbF46eC05o

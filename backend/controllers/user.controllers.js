@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import crypto from "crypto";
 import PDFDocument from "pdfkit"
 import jwt from "jsonwebtoken";
-
+import fs from "fs";
 
 
 const convertProfileToPdf = async (data)=>{
