@@ -117,3 +117,12 @@ export const delete_comment_of_user = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+
+
+export const incrLikes = async(req,res)=>{
+  try{
+
+  }catch(err){
+    return res.status(500).json({message : err.message})
+  }
+}
