@@ -99,3 +99,12 @@ export const get_comments_by_post = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+
+
+export const delete_comment_of_user = async(req,res)=>{
+  try{
+
+  }catch(err){
+    return res.status(500).json({message : err.message})
+  }
+}
