@@ -10,5 +10,8 @@ const connectionSchema = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : "User",
     },
-    
+    status_accepted : {
+        type : Boolean,
+        default : null,
+    }
 })
