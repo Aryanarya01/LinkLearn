@@ -81,3 +81,16 @@ export const commentPost = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+
+
+
+export const get_comments_by_post = async(req,res)=>{
+  try{
+      const Id = req.user.id;
+      const {post_id} = req.body;
+      const post = await Posts.findById({_id : post_id});
+      if()
+  }catch(err){  
+    return res.status(500).json({message : err.message});
+  }
+}
