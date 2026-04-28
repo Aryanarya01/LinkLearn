@@ -6,6 +6,11 @@ const Login = () => {
   const [username,setUsername] = useState<string>("");
   const [email,setEmail] = useState<string>("");
   const [password,setPassword] = useState<string>("");
+
+  const handelRegister = async(e:React.FormEvent)=>{
+    
+  }
+
   return (
     <div>
       <div>
