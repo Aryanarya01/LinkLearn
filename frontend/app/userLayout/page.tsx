@@ -1,9 +1,13 @@
+import NavbarComponent from '@/components/NavbarComponent/page'
 import React from 'react'
 
-const UserLayout = ({children}) => {
+const UserLayout = ({children}:any) => {
   return (
-        <NavbarCp
-        <div>{children}</div>
+         
+           <div>
+            <NavbarComponent/>
+            {children}
+            </div>
   )
 }
 
