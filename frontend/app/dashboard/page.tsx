@@ -18,7 +18,7 @@ const Dashboard = () => {
     }
    },[])
 const {user,setUser} = useUser();
-
+const [post,setPosts] = useState([])
 
 const getAboutUser = async()=>{
         try{
@@ -42,6 +42,10 @@ const getAboutUser = async()=>{
   
 )}
 <input type="text" />
+                </div>
+
+                <div className="Main_Feed_Container">
+
                 </div>
             </div>
         </DashboardLayout>
