@@ -2,7 +2,7 @@ import { Router } from "express";
 import router from "./user.route";
 import multer from "multer";
 import { Protect } from "../middleware/protect";
-import { commentPost, createPost, deletePost, get_comments_by_post, getAllPosts } from "../controllers/post.controllers";
+import { commentPost, createPost, deletePost, get_comments_by_post, getAllPosts, incrLikes } from "../controllers/post.controllers";
 
 
 const route = Router();
@@ -21,6 +21,7 @@ router.route("/posts").get(Protect,getAllPosts);
 router.route("/delete_post").post(Protect,deletePost);
 router.route("/comment_post").post(Protect,commentPost);
 router.route("/get_comment_by_post").get(Protect,get_comments_by_post);
-router.route("/delete_comment_of_user").delete(Protect,deletePost)
+router.route("/delete_comment_of_user").delete(Protect,deletePost);
+router.route("/increase_like").post(Protect,incrLikes)
 
 export default router
