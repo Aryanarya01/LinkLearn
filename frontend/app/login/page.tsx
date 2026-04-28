@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { clientServer } from '../config/page';
+import { useRouter } from 'next/router';
 
 const Login = () => {
-
+  const router = useRouter()
   const [name,setName] = useState<string>("");
   const [username,setUsername] = useState<string>("");
   const [email,setEmail] = useState<string>("");
@@ -10,6 +12,10 @@ const Login = () => {
   const handelRegister = async(e:React.FormEvent)=>{
       e.preventDefault();
       try{
+      const response =  await clientServer.post("/register",{
+          name,email,username,password
+        });
+
 
       }catch(err : any){
           alert(err.message)
