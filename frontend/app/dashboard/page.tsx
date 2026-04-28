@@ -43,7 +43,9 @@ const getAboutUser = async()=>{
   <img src={`${BASE_URL}/${user.userId.profilePicture}`} />
   
 )}
-<input type="text" />
+<textarea value={postContent} placeholder="Post Body..." onChange={(e)=>{
+    setPostContent(e.target.value)
+}}></textarea>
                 </div>
 
                 <div className="Main_Feed_Container">
