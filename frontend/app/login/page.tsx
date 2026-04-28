@@ -10,7 +10,7 @@ const Login = () => {
   const [username,setUsername] = useState<string>("");
   const [email,setEmail] = useState<string>("");
   const [password,setPassword] = useState<string>("");
-
+  const [userLogin,setUserLogin] = useState<boolean>(false)
   const handelRegister = async(e:React.FormEvent)=>{
       e.preventDefault();
       try{
@@ -31,7 +31,8 @@ const Login = () => {
       const response = await clientServer.post("/login",{
         email,password
       })
-      
+      alert("Login Successful");
+      router.push("/dashboard")
     }catch(err : any){
       alert(err.message);
     }
