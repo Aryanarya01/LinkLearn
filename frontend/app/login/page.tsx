@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { clientServer } from "../config/page";
 
 import { useRouter } from "next/navigation";
+import UserLayout from "../userLayout/page";
 const Login = () => {
   const router = useRouter();
   const [name, setName] = useState<string>("");
@@ -53,7 +54,9 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <UserLayout>
+       
+         <div>
       <div>
         <div>
           {!userLoginMethod && (
@@ -107,6 +110,8 @@ const Login = () => {
         </div>
       </div>
     </div>
+       
+    </UserLayout>
   );
 };
 
