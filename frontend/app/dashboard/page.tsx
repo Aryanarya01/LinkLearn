@@ -23,7 +23,7 @@ const getAboutUser = async()=>{
         try{
             const response = await clientServer.get("/get_user_and_Profile");
             setUser(response.data)
-            console.log(response);
+             
             
         }catch(err : any){
             alert(err.message)
