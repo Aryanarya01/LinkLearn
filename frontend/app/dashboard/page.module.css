@@ -1,0 +1,17 @@
+.FeedContainer{
+    display: flex;
+}
+
+
+.searchBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+
+}
+.searchBox img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+}

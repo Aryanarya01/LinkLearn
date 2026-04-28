@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import UserLayout from '../userLayout/page'
 import DashboardLayout from '../dashboardLayout/page'
 import { BASE_URL, clientServer } from '../config/page'
- 
+ import styles from "./page.module.css"
 
 const Dashboard = () => {
     const route = useRouter()
@@ -34,11 +34,13 @@ const getAboutUser = async()=>{
   return (
     <UserLayout>
         <DashboardLayout>
-            <div>
-                <div className="searchBox">
+            <div className={styles.FeedContainer}>
+                <div className={styles.searchBox}>
                     {user && user.userId && (
   <img src={`${BASE_URL}/${user.userId.profilePicture}`} />
+  
 )}
+<input type="text" />
                 </div>
             </div>
         </DashboardLayout>
