@@ -1,17 +1,17 @@
 
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { clientServer } from '../config/page'
 
 const DashboardLayout = ({children}:any) => {
-    
+    const [profiles,setProfiles] = useState<any>(null)
     useEffect(()=>{
         getAllProfile()
     },[])
 
     const getAllProfile = async()=>{
         const response = await clientServer.get("/user/get_all_users");
-
+        setProfiles(response.data);
     }
 
   return (
