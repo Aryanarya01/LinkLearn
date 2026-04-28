@@ -31,6 +31,15 @@ const Dashboard = () => {
     }
   };
 
+  const createPost = async ()=>{
+    try{
+
+    }catch(err){
+        console.log(err);
+        
+    }
+  }
+
   return (
     <UserLayout>
       <DashboardLayout>
@@ -41,11 +50,14 @@ const Dashboard = () => {
             )}
             <textarea
               value={postContent}
-              placeholder="Post Body..."
+              placeholder={"What's in your mind..."}
               onChange={(e) => {
                 setPostContent(e.target.value);
               }}
             ></textarea>
+
+            <label htmlFor="fileUpload"><div>Select</div></label>
+            <input type="file" hidden id="fileUpload" />
           </div>
 
           <div className="Main_Feed_Container"></div>
