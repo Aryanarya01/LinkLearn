@@ -1,8 +1,9 @@
 import React from 'react'
 
-const UserLayout = () => {
+const UserLayout = ({children}) => {
   return (
-     
+        <NavbarCp
+        <div>{children}</div>
   )
 }
 
