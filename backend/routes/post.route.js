@@ -18,10 +18,11 @@ const uploads = multer({ storage: storage });
 
 router.route("/post").post(uploads.single("media"),Protect,createPost);
 router.route("/posts").get(Protect,getAllPosts);
-router.route("/delete_post").post(Protect,deletePost);
+router.route("/delete_post").delete(Protect,deletePost);
 router.route("/comment_post").post(Protect,commentPost);
 router.route("/get_comment_by_post").get(Protect,get_comments_by_post);
 router.route("/delete_comment_of_user").delete(Protect,deletePost);
-router.route("/increase_like").post(Protect,incrLikes)
+router.route("/increase_like").post(Protect,incrLikes);
+
 
 export default router
