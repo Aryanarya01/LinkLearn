@@ -19,6 +19,8 @@ const Dashboard = () => {
    },[])
 const {user,setUser} = useUser();
 const [post,setPosts] = useState([])
+const [postContent,setPostContent] = useState("");
+const [fileContent,setFileContent] = useState("");
 
 const getAboutUser = async()=>{
         try{
