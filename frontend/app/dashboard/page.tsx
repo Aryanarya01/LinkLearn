@@ -46,6 +46,7 @@ const getAboutUser = async()=>{
 <textarea value={postContent} placeholder="Post Body..." onChange={(e)=>{
     setPostContent(e.target.value)
 }}></textarea>
+    
                 </div>
 
                 <div className="Main_Feed_Container">
