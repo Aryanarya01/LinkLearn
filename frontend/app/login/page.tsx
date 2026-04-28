@@ -8,7 +8,12 @@ const Login = () => {
   const [password,setPassword] = useState<string>("");
 
   const handelRegister = async(e:React.FormEvent)=>{
-    
+      e.preventDefault();
+      try{
+
+      }catch(err : any){
+        
+      }
   }
 
   return (
