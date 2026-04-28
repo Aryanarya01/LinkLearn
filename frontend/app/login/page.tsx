@@ -5,6 +5,7 @@ import { clientServer } from "../config/page";
 
 import { useRouter } from "next/navigation";
 import UserLayout from "../userLayout/page";
+import { useUser } from "../context/page";
 const Login = () => {
   const router = useRouter();
   const [name, setName] = useState<string>("");
@@ -12,7 +13,7 @@ const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userLoginMethod, setUserLoginMethod] = useState<boolean>(true);
-
+  const {setUser} = useUser()
   useEffect(()=>{
     if(localStorage.getItem("token")){
       router.push("/dashboard")
@@ -46,6 +47,7 @@ const Login = () => {
         if (response.data.token) {
         localStorage.setItem("token", response.data.token);
         } 
+        setUser(response.data.user)
       alert("Login Successful");
       router.push("/dashboard");
     } catch (err: any) {

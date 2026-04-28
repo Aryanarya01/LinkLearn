@@ -5,6 +5,7 @@ import UserLayout from '../userLayout/page'
 import DashboardLayout from '../dashboardLayout/page'
 import { BASE_URL, clientServer } from '../config/page'
  import styles from "./page.module.css"
+import { useUser } from "../context/page";
 
 const Dashboard = () => {
     const route = useRouter()
@@ -16,7 +17,7 @@ const Dashboard = () => {
         getAboutUser();
     }
    },[])
-const [user,setUser] = useState<any>(null);
+const {user,setUser} = useUser();
 
 
 const getAboutUser = async()=>{
