@@ -85,7 +85,8 @@ export const login = async (req, res) => {
       sameSite: "lax",
       path: "/",
     });
-    return res.status(200).json({ message: "Login Successfull" });
+    return res.status(200).json({ message: "Login Successfull" , token: token,   // 👈 ADD THIS
+  user: user});
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "Server error!" });

@@ -4,7 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import userRouter from "./routes/user.route.js";
 import cookieParser from "cookie-parser";
-
+import postRouter from "./routes/post.route.js"
 dotenv.config();
 const app = express();
 const port = 9090;
@@ -17,6 +17,7 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use(userRouter);
+app.use(postRouter)
 
 const start = async () => {
   const connectDb = await mongoose.connect(

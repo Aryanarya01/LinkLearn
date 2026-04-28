@@ -18,7 +18,7 @@ const Login = () => {
     if(localStorage.getItem("token")){
       router.push("/dashboard")
     }
-  })
+  },[])
 
 
 
@@ -44,11 +44,21 @@ const Login = () => {
         email,
         password,
       });
-        if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
-        } 
+      const token = response.data.token;
+
+    if (!token) {
+      alert("Token not received");
+      return;
+    }
+
+    // ✅ save token
+    localStorage.setItem("token", token);
+
+    // ✅ verify save
+    console.log("SAVED TOKEN:", localStorage.getItem("token"));
         setUser(response.data.user)
       alert("Login Successful");
+       console.log(response.data);
       router.push("/dashboard");
     } catch (err: any) {
       alert(err.message);

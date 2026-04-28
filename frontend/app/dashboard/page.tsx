@@ -6,13 +6,12 @@ import DashboardLayout from "../dashboardLayout/page";
 import { BASE_URL, clientServer } from "../config/page";
 import styles from "./page.module.css";
 import { useUser } from "../context/page";
-import { headers } from "next/headers";
 
 const Dashboard = () => {
   const route = useRouter();
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
+    if (!token) {
       route.push("/login");
     } else {
       getAboutUser();
@@ -21,7 +20,7 @@ const Dashboard = () => {
   const { user, setUser } = useUser();
   const [post, setPosts] = useState([]);
   const [postContent, setPostContent] = useState("");
-  const [fileContent, setFileContent] = useState("");
+  const [fileContent, setFileContent] = useState<File | null>(null)
 
   const getAboutUser = async () => {
     try {
@@ -34,12 +33,19 @@ const Dashboard = () => {
 
   const createPost = async ()=>{
     try{
-          const {file,body} = userData;
+           
         const formData = new FormData();
-        formData.append("body",body);
-        formData.append("media",file)
+        formData.append("body",postContent);
+       if(fileContent){
+         formData.append("media",fileContent)
+       }
        
         const response = await clientServer.post("/post",formData)
+        console.log(response);
+        
+        alert("post created")
+        setFileContent("");
+        setFileContent(null)
     }catch(err){
         console.log(err);
     }
@@ -62,7 +68,10 @@ const Dashboard = () => {
             ></textarea>
 
             <label htmlFor="fileUpload"><div>Select</div></label>
-            <input type="file" hidden id="fileUpload" />
+            <input type="file" hidden id="fileUpload" onChange={(e)=>setFileContent(e.target.files?.[0] || null)} />
+            <button onClick={()=>{
+                createPost()
+            }}>Post</button>
           </div>
 
           <div className="Main_Feed_Container"></div>

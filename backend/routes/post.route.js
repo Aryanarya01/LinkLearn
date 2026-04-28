@@ -1,11 +1,11 @@
 import { Router } from "express";
-import router from "./user.route";
+ 
 import multer from "multer";
-import { Protect } from "../middleware/protect";
-import { commentPost, createPost, deletePost, get_comments_by_post, getAllPosts, incrLikes } from "../controllers/post.controllers";
+import { Protect } from "../middleware/protect.js";
+import { commentPost, createPost, deletePost, get_comments_by_post, getAllPosts, incrLikes } from "../controllers/post.controllers.js";
 
 
-const route = Router();
+const router = Router();
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
@@ -25,4 +25,4 @@ router.route("/delete_comment_of_user").delete(Protect,deletePost);
 router.route("/increase_like").post(Protect,incrLikes);
 
 
-export default router
+export default router;
