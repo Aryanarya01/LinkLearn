@@ -1,2 +1,15 @@
 backend/node_modules
 backend/.env
+
+frontend/node_modules
+backend/node_modules
+node_modules/
+.env
+.env.*
+**/.env
+ 
+.next
+ frontend/.next
+ dist
+build
+allfiles.txt
