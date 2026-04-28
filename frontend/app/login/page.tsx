@@ -12,7 +12,7 @@ const Login = () => {
       try{
 
       }catch(err : any){
-        
+          alert(err.message)
       }
   }
 
