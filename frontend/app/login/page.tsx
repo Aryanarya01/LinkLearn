@@ -26,8 +26,9 @@ const Login = () => {
   }
 
   const handelLogin = async (e)=>{
-    try{
-
+    e.preventDefault();
+    try{  
+      const 
     }catch(err : any){
       alert(err.message);
     }
