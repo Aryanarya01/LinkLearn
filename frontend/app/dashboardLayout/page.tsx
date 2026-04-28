@@ -1,8 +1,19 @@
 
 
-import React from 'react'
+import React, { useEffect } from 'react'
+import { clientServer } from '../config/page'
 
 const DashboardLayout = ({children}:any) => {
+    
+    useEffect(()=>{
+        getAllProfile()
+    },[])
+
+    const getAllProfile = async()=>{
+        const response = await clientServer.get("/user/get_all_users");
+
+    }
+
   return (
     <div>
         <div className="container">
@@ -13,7 +24,8 @@ const DashboardLayout = ({children}:any) => {
             </div>
             <div className="mainContainer">{children}</div>
             <div className="right_container">
-                <h2>Top connection</h2>
+                <h2>Top Profiles</h2>
+
             </div>
         </div>
     </div>
