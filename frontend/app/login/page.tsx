@@ -28,7 +28,10 @@ const Login = () => {
   const handelLogin = async (e)=>{
     e.preventDefault();
     try{  
-      const 
+      const response = await clientServer.post("/login",{
+        email,password
+      })
+      
     }catch(err : any){
       alert(err.message);
     }
