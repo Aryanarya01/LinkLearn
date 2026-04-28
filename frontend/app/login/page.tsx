@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { clientServer } from "../config/page";
 
 import { useRouter } from "next/navigation";
@@ -10,7 +10,16 @@ const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [userLoginMethod, setUserLoginMethod] = useState<boolean>(false);
+  const [userLoginMethod, setUserLoginMethod] = useState<boolean>(true);
+
+  useEffect(()=>{
+    if(localStorage.getItem("token")){
+      router.push("/dashboard")
+    }
+  })
+
+
+
   const handelRegister = async () => {
     try {
       const response = await clientServer.post("/register", {
@@ -33,6 +42,9 @@ const Login = () => {
         email,
         password,
       });
+        if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        } 
       alert("Login Successful");
       router.push("/dashboard");
     } catch (err: any) {
