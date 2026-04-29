@@ -15,6 +15,14 @@ const profileFetched = async()=>{
     alert(err.message)
   }
 }
+
+const allPosts = async()=>{
+  try{
+
+  }catch(err : any){
+
+  }
+}
 useEffect(()=>{
   profileFetched()
 },[])
@@ -22,13 +30,25 @@ useEffect(()=>{
   return (
       <UserLayout>
         <DashboardLayout>
-          <div>
+          <div >
        {profile && profile.userId &&
         <div className={styles.main_container}>
+
         <div className={styles.backDropContainer}>
           <img src={`${BASE_URL}/${profile.userId.profilePicture}`}  />
         </div>
-           </div>
+
+          <div className={styles.info_Container}>
+            <h2>{profile.userId.name}</h2>
+            <p>{profile.userId.username}</p>
+            <p>{profile.bio}</p>
+            <div className={styles.recent_container}>
+
+            </div>
+          </div>
+
+
+        </div>
        }
      </div>
         </DashboardLayout>

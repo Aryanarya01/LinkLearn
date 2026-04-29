@@ -1,6 +1,10 @@
 
 .main_container{
-
+    margin: 2rem;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
 }
 .backDropContainer{
  width: 100%;
@@ -14,4 +18,11 @@
 
 .backDropContainer img {
     width: 7rem;
+    position: absolute;
+    border-radius: 50%;
+    bottom: -30%;
+    left: 8%;
+}
+.recent_container{
+    
 }
