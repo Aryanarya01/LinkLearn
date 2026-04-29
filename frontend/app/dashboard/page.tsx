@@ -187,7 +187,7 @@ const Dashboard = () => {
                     >
                       comment
                     </p>
-                    
+
                     {isModalOpen && selectedPostId === post._id && (
                       <div>
                         {comments.length > 0 &&
@@ -207,7 +207,9 @@ const Dashboard = () => {
                           placeholder="Enter your comment!"
                         />
                         <button onClick={commentPost}>send</button>
-                        <button onClick={() => setIsModelOpen(false)}>Close</button>
+                        <button onClick={() => setIsModelOpen(false)}>
+                          Close
+                        </button>
                       </div>
                     )}
 
