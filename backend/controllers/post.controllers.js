@@ -66,9 +66,9 @@ export const commentPost = async (req, res) => {
   try {
     const Id = req.user.id;
     const { post_id, body } = req.body;
-    const post = await Posts.findOne({ _id: post_id });
+    const post = await Posts.findById(post_id);
     if (!post) {
-      return req.status(404).json({ message: "Post not found!" });
+      return res.status(404).json({ message: "Post not found!" });
     }
     const newComment = new Comment({
       userId: Id,

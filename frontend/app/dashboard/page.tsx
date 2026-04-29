@@ -84,12 +84,12 @@ const Dashboard = () => {
 
   const getAllComment = async(post_id : string)=>{
     try{  
-      const response = await clientServer.get("get_comment_by_post",{
+      const response = await clientServer.get("/get_comment_by_post",{
         params : {
-          postId : post_id
+           post_id
         } 
       });
-      setComments(response.data.comments)
+      setComments(response.data)
 
     }catch(err:any){
       alert(err.message)
@@ -99,10 +99,14 @@ const Dashboard = () => {
   const commentPost = async ()=>{
     try{ 
       const response = await clientServer.post("/comment_post",{
-        data : {
-          postId : post
-        }
+        
+          post_id : selectedPostId,
+          body : commentText
+
+        
       })
+      setCommentText("");
+        getAllComment(selectedPostId);
     }catch(err:any){
       alert(err.message);
     }
@@ -163,9 +167,9 @@ const Dashboard = () => {
 
 
                     <p onClick={()=>{
-                      selectedPostId(post._id)
-                      setIsModelOpen(true)
-                      getAllComment(post._id)
+                      setSelectedPostId(post._id);
+                      setIsModelOpen(true);
+                      getAllComment(post._id);
                     }} >comment</p>
                      {isModalOpen && (
                       <div>
