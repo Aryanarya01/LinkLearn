@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import UserLayout from "../userLayout/page";
 import DashboardLayout from "../dashboardLayout/page";
 import { clientServer } from "../config/page";
+import { profile } from "console";
 const [profiles, setProfiles] = useState([]);
 const Discover = () => {
   const getAllProfile = async () => {
@@ -19,7 +20,15 @@ const Discover = () => {
       <DashboardLayout>
         <div>
           <h1>Discover</h1>
-          {}
+          {profiles && 
+            profiles.map((profile)=>{
+                return(
+                    <div key={profile._id}>
+                        
+                    </div>
+                )
+            })
+          }
         </div>
       </DashboardLayout>
     </UserLayout>
