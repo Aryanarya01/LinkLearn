@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+ "use client"
 import UserLayout from "../userLayout/page";
 import DashboardLayout from "../dashboardLayout/page";
-import { clientServer } from "../config/page";
-import { profile } from "console";
-const [profiles, setProfiles] = useState([]);
+import { BASE_URL, clientServer } from "../config/page";
+import { useEffect, useState } from "react";
+ 
 const Discover = () => {
+
+
+    const [profiles, setProfiles] = useState([]);
+
+
+    
+    
   const getAllProfile = async () => {
     try {
       const response = await clientServer.get("/user/get_all_users");
@@ -15,6 +22,9 @@ const Discover = () => {
     }
   };
 
+  useEffect(()=>{
+    getAllProfile()
+  },[])
   return (
     <UserLayout>
       <DashboardLayout>
@@ -23,8 +33,9 @@ const Discover = () => {
           {profiles && 
             profiles.map((profile)=>{
                 return(
-                    <div key={profile._id}>
-                        
+                    <div className={sty} key={profile._id}>
+                        <img src={`${BASE_URL}/${profile.userId?.profilePicture}`} alt="" />
+                        <h3>{profile.userId?.name}</h3>
                     </div>
                 )
             })
