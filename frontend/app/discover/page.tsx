@@ -3,7 +3,7 @@ import UserLayout from "../userLayout/page";
 import DashboardLayout from "../dashboardLayout/page";
 import { BASE_URL, clientServer } from "../config/page";
 import { useEffect, useState } from "react";
- 
+ import styles from "./page.module.css"
 const Discover = () => {
 
 
@@ -33,7 +33,7 @@ const Discover = () => {
           {profiles && 
             profiles.map((profile)=>{
                 return(
-                    <div className={sty} key={profile._id}>
+                    <div className={styles.Profile} key={profile._id}>
                         <img src={`${BASE_URL}/${profile.userId?.profilePicture}`} alt="" />
                         <h3>{profile.userId?.name}</h3>
                     </div>
