@@ -15,7 +15,10 @@ const NavbarComponent = () => {
             <h3 onClick={()=>{
               router.push("/profile")
             }}>Profile</h3>
-            <h3>Logout</h3>
+            <h3 onClick={()=>{
+               localStorage.removeItem("token");
+                    router.push("/login");
+            }}>Logout</h3>
           </div>
         </nav>
     </div>
