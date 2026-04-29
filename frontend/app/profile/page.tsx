@@ -8,7 +8,7 @@ const [profile, setProfile] = useState("")
 const profileFetched = async()=>{
   try{
       const response = await clientServer.get("/get_user_and_Profile");
-
+      setProfile(response.data.userProfile);
   }catch(err : any){
     alert(err.message)
   }
