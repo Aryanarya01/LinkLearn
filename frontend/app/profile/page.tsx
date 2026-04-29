@@ -5,9 +5,10 @@ import { clientServer } from '../config/page'
 
 const Profile = () => {
 
-const getProfile = async()=>{
+const profileFetched = async()=>{
   try{
-      const response = await clientServer.get("/get_user_and_Profile")
+      const response = await clientServer.get("/get_user_and_Profile");
+
   }catch(err : any){
     alert(err.message)
   }
