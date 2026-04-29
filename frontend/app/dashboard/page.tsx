@@ -108,17 +108,15 @@ const Dashboard = () => {
     }
   };
 
-
-  const incrLikes = async(post_id : string)=>{
-    try{
-      const response = await clientServer.post("/increase_like",{
-        post_id
-      })
-
-    }catch(err : any){
-      alert(err.message)
+  const incrLikes = async (post_id: string) => {
+    try {
+      const response = await clientServer.post("/increase_like", {
+        post_id,
+      });
+    } catch (err: any) {
+      alert(err.message);
     }
-  }
+  };
 
   return (
     <UserLayout>
@@ -172,10 +170,14 @@ const Dashboard = () => {
                       alt=""
                     />
 
-                      <p onClick={()=>{
+                    <p
+                      onClick={() => {
                         incrLikes(post._id);
-                        getAllPost()
-                      }}>{post.likes}</p>
+                        getAllPost();
+                      }}
+                    >
+                      {post.likes}
+                    </p>
                     <p
                       onClick={() => {
                         setSelectedPostId(post._id);
