@@ -69,7 +69,18 @@ useEffect(()=>{
 
 
 
-            div.
+            <div className={styles.Education_section}>
+              <h2>Work History</h2>
+              {profile && (
+                profile.map((work)=>{
+                  return (
+                    <div key={work._id}>
+                      <h4></h4>
+                    </div>
+                  )
+                })
+              )}
+            </div>
           </div>
 
 
