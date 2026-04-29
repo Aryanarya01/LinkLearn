@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { clientServer } from '../config/page'
 import { useRouter } from 'next/navigation'
-
+import styles from "./page.module.css"
 const DashboardLayout = ({children}:any) => {
     const router = useRouter()
     const [profiles,setProfiles] = useState([])
@@ -35,7 +35,7 @@ const DashboardLayout = ({children}:any) => {
                 <h2>My Connection</h2>
             </div>
             <div className="mainContainer">{children}</div>
-            <div className="right_container">
+            <div className={right_container}>
                 <h2>Top Profiles</h2>
                 { profiles &&
                      profiles?.map((profile)=>{

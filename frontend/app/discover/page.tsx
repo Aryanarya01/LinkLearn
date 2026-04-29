@@ -1,10 +1,18 @@
 
 
 import React from 'react'
+import UserLayout from '../userLayout/page'
+import DashboardLayout from '../dashboardLayout/page'
 
 const Discover = () => {
   return (
-    <div>Discover</div>
+    <UserLayout>
+        <DashboardLayout>
+            <div>
+                <h1>Discover</h1>
+            </div>
+        </DashboardLayout>
+    </UserLayout>
   )
 }
 
