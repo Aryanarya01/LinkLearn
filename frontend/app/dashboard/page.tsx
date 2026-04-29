@@ -176,7 +176,7 @@ const Dashboard = () => {
                         getAllPost();
                       }}
                     >
-                      {post.likes}
+                      ❤️{post.likes}
                     </p>
                     <p
                       onClick={() => {
@@ -187,6 +187,7 @@ const Dashboard = () => {
                     >
                       comment
                     </p>
+                    
                     {isModalOpen && selectedPostId === post._id && (
                       <div>
                         {comments.length > 0 &&
@@ -206,6 +207,7 @@ const Dashboard = () => {
                           placeholder="Enter your comment!"
                         />
                         <button onClick={commentPost}>send</button>
+                        <button onClick={() => setIsModelOpen(false)}>Close</button>
                       </div>
                     )}
 
