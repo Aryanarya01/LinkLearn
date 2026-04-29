@@ -1,9 +1,11 @@
 
-
+"use client"
 import React, { useEffect, useState } from 'react'
 import { clientServer } from '../config/page'
+import { useRouter } from 'next/navigation'
 
 const DashboardLayout = ({children}:any) => {
+    const router = useRouter()
     const [profiles,setProfiles] = useState([])
     useEffect(()=>{
         getAllProfile()
@@ -27,7 +29,9 @@ const DashboardLayout = ({children}:any) => {
         <div className="container">
             <div className="left_container">
                 <h2>Scrool</h2>
-                <h2>Discover</h2>
+                <h2 onClick={()=>{
+                    router.push("/discover")
+                }}>Discover</h2>
                 <h2>My Connection</h2>
             </div>
             <div className="mainContainer">{children}</div>
