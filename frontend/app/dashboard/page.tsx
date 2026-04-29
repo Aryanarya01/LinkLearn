@@ -99,8 +99,9 @@ const Dashboard = () => {
               {posts.length > 0 ? ( 
                 posts.map((post)=>{
                   return(
-                    <div key={post._id}>
-                      <img  src={`${BASE_URL}/${post.media}`} alt="" />
+                    <div key={post._id} >
+                      <button>Delete</button>
+                      <img className={styles.postIMage} src={`${BASE_URL}/${post.media}`} alt="" />
                         <h2>{post.body}</h2>
                     </div>
                   )
