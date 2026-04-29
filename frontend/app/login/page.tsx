@@ -12,7 +12,7 @@ const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [userLoginMethod, setUserLoginMethod] = useState<boolean>(false);
+  const [userLoginMethod, setUserLoginMethod] = useState<boolean>(true);
   const {setUser} = useUser()
   useEffect(()=>{
     if(localStorage.getItem("token")){
