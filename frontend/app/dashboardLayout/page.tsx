@@ -26,16 +26,16 @@ const DashboardLayout = ({children}:any) => {
 
   return (
     <div>
-        <div className="container">
-            <div className="left_container">
+        <div className={styles.container}>
+            <div className={styles.left_container}>
                 <h2>Scrool</h2>
                 <h2 onClick={()=>{
                     router.push("/discover")
                 }}>Discover</h2>
                 <h2>My Connection</h2>
             </div>
-            <div className="mainContainer">{children}</div>
-            <div className={right_container}>
+            <div className={styles.mainContainer}>{children}</div>
+            <div className={styles.right_container}>
                 <h2>Top Profiles</h2>
                 { profiles &&
                      profiles?.map((profile)=>{
