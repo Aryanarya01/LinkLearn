@@ -6,7 +6,9 @@ import styles from "./page.module.css"
 import UserLayout from '../userLayout/page'
 import DashboardLayout from '../dashboardLayout/page'
 const Profile = () => {
-const [profile, setProfile] = useState({})
+const [profile, setProfile] = useState({});
+const [posts,setPosts]= useState([])
+
 const profileFetched = async()=>{
   try{
       const response = await clientServer.get("/get_user_and_Profile");
@@ -18,9 +20,10 @@ const profileFetched = async()=>{
 
 const allPosts = async()=>{
   try{
+    const response = await clientServer.get("/posts");
 
   }catch(err : any){
-
+    alert(err.message)
   }
 }
 useEffect(()=>{
