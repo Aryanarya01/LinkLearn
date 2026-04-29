@@ -108,6 +108,15 @@ const Dashboard = () => {
     }
   };
 
+
+  const incrLikes = async()=>{
+    try{
+
+    }catch(err : any){
+      alert(err.message)
+    }
+  }
+
   return (
     <UserLayout>
       <DashboardLayout>
