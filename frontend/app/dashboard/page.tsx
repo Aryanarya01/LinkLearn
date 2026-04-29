@@ -27,7 +27,7 @@ const Dashboard = () => {
      getAllPost();
   },[posts])
    
-
+  
    
   const getAboutUser = async () => {
     try {
