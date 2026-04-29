@@ -13,7 +13,8 @@ const Dashboard = () => {
   const [posts, setPosts] = useState([]);
   const [postContent, setPostContent] = useState("");
   const [fileContent, setFileContent] = useState<File | null>(null);
-
+  const [comments,setComments] = useState([]);
+  const [isModalOpen,setIsModelOpen] = useState(false)
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -79,8 +80,14 @@ const Dashboard = () => {
     }
   };
 
-  const getAllComment = async()=>{
-    try{
+  const getAllComment = async(post_id : string)=>{
+    try{  
+      const response = await clientServer.get("get_comment_by_post",{
+        data : {
+          postId : post_id
+        } 
+      });
+      setComments(response.data)
 
     }catch(err:any){
       alert(err.message)
@@ -151,6 +158,9 @@ const Dashboard = () => {
                       alt=""
                     />
                     <p >comment</p>
+                    <div>
+
+                    </div>
                     <h2>{post.body}</h2>
                   </div>
                 );
