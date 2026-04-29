@@ -12,7 +12,7 @@ const Dashboard = () => {
   const { user, setUser } = useUser();
   const [posts, setPosts] = useState([]);
   const [postContent, setPostContent] = useState("");
-  const [fileContent, setFileContent] = useState<File | null>(null)
+  const [fileContent, setFileContent] = useState<File | null>(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -23,12 +23,10 @@ const Dashboard = () => {
     }
   }, []);
 
-  useEffect(()=>{
-     getAllPost();
-  },[posts])
-   
-  
-   
+  useEffect(() => {
+    getAllPost();
+  }, [posts]);
+
   const getAboutUser = async () => {
     try {
       const response = await clientServer.get("/get_user_and_Profile");
@@ -38,36 +36,43 @@ const Dashboard = () => {
     }
   };
 
-  const getAllPost = async()=>{
-    try{
+  const getAllPost = async () => {
+    try {
       const response = await clientServer.get("/posts");
       setPosts(response.data.posts);
-    }catch(err:any){
-      alert(err.message)
+    } catch (err: any) {
+      alert(err.message);
     }
-  }
+  };
 
-  const createPost = async ()=>{
+  const createPost = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("body", postContent);
+      if (fileContent) {
+        formData.append("media", fileContent);
+      }
+
+      const response = await clientServer.post("/post", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response);
+
+      alert("post created");
+      setPostContent("");
+      setFileContent(null);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const deletePost = async()=>{
     try{
-           
-        const formData = new FormData();
-        formData.append("body",postContent);
-       if(fileContent){
-         formData.append("media",fileContent)
-       }
-       
-        const response = await clientServer.post("/post",formData,{
-          headers: {
-    "Content-Type": "multipart/form-data",
-  },
-        })
-        console.log(response);
-        
-        alert("post created")
-        setPostContent("");
-        setFileContent(null)
+      const res
     }catch(err){
-        console.log(err);
+      alert(err.message)
     }
   }
 
@@ -87,26 +92,42 @@ const Dashboard = () => {
               }}
             ></textarea>
 
-            <label htmlFor="fileUpload"><div>Select</div></label>
-            <input type="file" hidden id="fileUpload" onChange={(e)=>setFileContent(e.target.files?.[0] || null)} />
-            <button onClick={()=>{
-                createPost()
-            }}>Post</button>
+            <label htmlFor="fileUpload">
+              <div>Select</div>
+            </label>
+            <input
+              type="file"
+              hidden
+              id="fileUpload"
+              onChange={(e) => setFileContent(e.target.files?.[0] || null)}
+            />
+            <button
+              onClick={() => {
+                createPost();
+              }}
+            >
+              Post
+            </button>
           </div>
 
           <div className="Main_Feed_Container">
-
-              {posts.length > 0 ? ( 
-                posts.map((post)=>{
-                  return(
-                    <div key={post._id} >
-                      <button>Delete</button>
-                      <img className={styles.postIMage} src={`${BASE_URL}/${post.media}`} alt="" />
-                        <h2>{post.body}</h2>
-                    </div>
-                  )
-                })
-              ):(<p>No posts</p>)}
+            {posts.length > 0 ? (
+              posts.map((post) => {
+                return (
+                  <div key={post._id}>
+                    <button>Delete</button>
+                    <img
+                      className={styles.postIMage}
+                      src={`${BASE_URL}/${post.media}`}
+                      alt=""
+                    />
+                    <h2>{post.body}</h2>
+                  </div>
+                );
+              })
+            ) : (
+              <p>No posts</p>
+            )}
           </div>
         </div>
       </DashboardLayout>
