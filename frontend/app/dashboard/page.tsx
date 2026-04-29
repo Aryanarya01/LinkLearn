@@ -159,7 +159,11 @@ const Dashboard = () => {
                       src={`${BASE_URL}/${post.media}`}
                       alt=""
                     />
+
+
+
                     <p onClick={()=>{
+                      selectedPostId(post._id)
                       setIsModelOpen(true)
                       getAllComment(post._id)
                     }} >comment</p>
@@ -172,6 +176,9 @@ const Dashboard = () => {
                                 )
                               })
                             )}
+
+                            <input type="text" value={commentText} onChange={(e)=>setCommentText(e.target.value)} placeholder="Enter your comment!"/>
+                            <button onClick={commentPost}>send</button>
                       </div>
                      )}
                     <h2>{post.body}</h2>
