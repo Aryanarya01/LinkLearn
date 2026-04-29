@@ -14,7 +14,9 @@ const Dashboard = () => {
   const [postContent, setPostContent] = useState("");
   const [fileContent, setFileContent] = useState<File | null>(null);
   const [comments,setComments] = useState([]);
-  const [isModalOpen,setIsModelOpen] = useState(false)
+  const [isModalOpen,setIsModelOpen] = useState(false);
+  const [commentText, setCommentText] = useState("");
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -83,11 +85,11 @@ const Dashboard = () => {
   const getAllComment = async(post_id : string)=>{
     try{  
       const response = await clientServer.get("get_comment_by_post",{
-        data : {
+        params : {
           postId : post_id
         } 
       });
-      setComments(response.data)
+      setComments(response.data.comments)
 
     }catch(err:any){
       alert(err.message)
@@ -98,7 +100,7 @@ const Dashboard = () => {
     try{ 
       const response = await clientServer.post("/comment_post",{
         data : {
-
+          postId : post
         }
       })
     }catch(err:any){
@@ -157,10 +159,21 @@ const Dashboard = () => {
                       src={`${BASE_URL}/${post.media}`}
                       alt=""
                     />
-                    <p >comment</p>
-                    <div>
-
-                    </div>
+                    <p onClick={()=>{
+                      setIsModelOpen(true)
+                      getAllComment(post._id)
+                    }} >comment</p>
+                     {isModalOpen && (
+                      <div>
+                            {comments.length > 0 && (
+                              comments.map((comment)=>{
+                                return(
+                                  <p>{comment.body}</p>
+                                )
+                              })
+                            )}
+                      </div>
+                     )}
                     <h2>{post.body}</h2>
                   </div>
                 );
