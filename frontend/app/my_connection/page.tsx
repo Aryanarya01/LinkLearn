@@ -8,6 +8,10 @@ const page = () => {
         <DashboardLayout>
             <div>
                 <h2>My Connections</h2>
+                <div>
+                    <h4>My Network</h4>
+                </div>
+                
             </div>
         </DashboardLayout>
      </UserLayout>
