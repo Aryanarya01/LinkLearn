@@ -13,10 +13,10 @@ const Dashboard = () => {
   const [posts, setPosts] = useState([]);
   const [postContent, setPostContent] = useState("");
   const [fileContent, setFileContent] = useState<File | null>(null);
-  const [comments,setComments] = useState([]);
-  const [isModalOpen,setIsModelOpen] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [isModalOpen, setIsModelOpen] = useState(false);
   const [commentText, setCommentText] = useState("");
-  const [selectedPostId,setSelectedPostId] = useState("")
+  const [selectedPostId, setSelectedPostId] = useState("");
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -82,35 +82,31 @@ const Dashboard = () => {
     }
   };
 
-  const getAllComment = async(post_id : string)=>{
-    try{  
-      const response = await clientServer.get("/get_comment_by_post",{
-        params : {
-           post_id
-        } 
+  const getAllComment = async (post_id: string) => {
+    try {
+      const response = await clientServer.get("/get_comment_by_post", {
+        params: {
+          post_id,
+        },
       });
-      setComments(response.data)
-
-    }catch(err:any){
-      alert(err.message)
-    }
-  }
-
-  const commentPost = async ()=>{
-    try{ 
-      const response = await clientServer.post("/comment_post",{
-        
-          post_id : selectedPostId,
-          body : commentText
-
-        
-      })
-      setCommentText("");
-        getAllComment(selectedPostId);
-    }catch(err:any){
+      setComments(response.data);
+    } catch (err: any) {
       alert(err.message);
     }
-  }
+  };
+
+  const commentPost = async () => {
+    try {
+      const response = await clientServer.post("/comment_post", {
+        post_id: selectedPostId,
+        body: commentText,
+      });
+      setCommentText("");
+      getAllComment(selectedPostId);
+    } catch (err: any) {
+      alert(err.message);
+    }
+  };
 
   return (
     <UserLayout>
@@ -164,27 +160,31 @@ const Dashboard = () => {
                       alt=""
                     />
 
-
-
-                    <p onClick={()=>{
-                      setSelectedPostId(post._id);
-                      setIsModelOpen(true);
-                      getAllComment(post._id);
-                    }} >comment</p>
-                     {isModalOpen && (
+                    <p
+                      onClick={() => {
+                        setSelectedPostId(post._id);
+                        setIsModelOpen(true);
+                        getAllComment(post._id);
+                      }}
+                    >
+                      comment
+                    </p>
+                    {isModalOpen && (
                       <div>
-                            {comments.length > 0 && (
-                              comments.map((comment)=>{
-                                return(
-                                  <p>{comment.body}</p>
-                                )
-                              })
-                            )}
+                        {comments.length > 0 &&
+                          comments.map((comment) => {
+                            return <p>{comment.body}</p>;
+                          })}
 
-                            <input type="text" value={commentText} onChange={(e)=>setCommentText(e.target.value)} placeholder="Enter your comment!"/>
-                            <button onClick={commentPost}>send</button>
+                        <input
+                          type="text"
+                          value={commentText}
+                          onChange={(e) => setCommentText(e.target.value)}
+                          placeholder="Enter your comment!"
+                        />
+                        <button onClick={commentPost}>send</button>
                       </div>
-                     )}
+                    )}
                     <h2>{post.body}</h2>
                   </div>
                 );
