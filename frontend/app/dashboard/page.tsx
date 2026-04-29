@@ -68,16 +68,16 @@ const Dashboard = () => {
     }
   };
 
-  const deletePost = async(post_id : string)=>{
-    try{
-      const response = await clientServer.delete("/delete_post",{
-        data : {post_id}
+  const deletePost = async (post_id: string) => {
+    try {
+      const response = await clientServer.delete("/delete_post", {
+        data: { post_id },
       });
-      getAllPost(); 
-    }catch(err :any){
-      alert(err.message)
+      getAllPost();
+    } catch (err: any) {
+      alert(err.message);
     }
-  }
+  };
 
   return (
     <UserLayout>
@@ -118,9 +118,13 @@ const Dashboard = () => {
               posts.map((post) => {
                 return (
                   <div key={post._id}>
-                    <button onClick={()=>{
-                      deletePost(post._id)
-                    }}>Delete</button>
+                    <button
+                      onClick={() => {
+                        deletePost(post._id);
+                      }}
+                    >
+                      Delete
+                    </button>
                     <img
                       className={styles.postIMage}
                       src={`${BASE_URL}/${post.media}`}
