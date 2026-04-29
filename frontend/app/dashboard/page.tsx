@@ -16,7 +16,7 @@ const Dashboard = () => {
   const [comments,setComments] = useState([]);
   const [isModalOpen,setIsModelOpen] = useState(false);
   const [commentText, setCommentText] = useState("");
-  
+  const [selectedPostId,setSelectedPostId] = useState("")
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
