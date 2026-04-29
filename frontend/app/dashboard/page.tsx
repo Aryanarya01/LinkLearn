@@ -173,14 +173,12 @@ const Dashboard = () => {
                       <div>
                         {comments.length > 0 &&
                           comments.map((comment) => {
-                            
                             return (
-                              
-                            <div key={comment._id}>
-                              <p>{post.userId.username}</p>
-                              <p>{comment.body}</p>
-                            </div>
-                            )
+                              <div key={comment._id}>
+                                <p>{post.userId.username}</p>
+                                <p>{comment.body}</p>
+                              </div>
+                            );
                           })}
 
                         <input
@@ -193,8 +191,6 @@ const Dashboard = () => {
                       </div>
                     )}
 
-                    
-                     
                     <h2>{post.body}</h2>
                   </div>
                 );
