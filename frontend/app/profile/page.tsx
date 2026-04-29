@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import { BASE_URL, clientServer } from '../config/page'
 import styles from "./page.module.css"
+import UserLayout from '../userLayout/page'
+import DashboardLayout from '../dashboardLayout/page'
 const Profile = () => {
 const [profile, setProfile] = useState({})
 const profileFetched = async()=>{
@@ -18,7 +20,9 @@ useEffect(()=>{
 },[])
 
   return (
-     <div>
+      <UserLayout>
+        <DashboardLayout>
+          <div>
        {profile && profile.userId &&
         <div className={styles.main_container}>
         <div className={styles.backDropContainer}>
@@ -27,6 +31,8 @@ useEffect(()=>{
            </div>
        }
      </div>
+        </DashboardLayout>
+      </UserLayout>
   )
 }
 
