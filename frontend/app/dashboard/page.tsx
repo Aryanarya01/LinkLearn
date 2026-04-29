@@ -25,7 +25,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getAllPost();
-  }, [posts]);
+  }, []);
 
   const getAboutUser = async () => {
     try {
@@ -68,10 +68,13 @@ const Dashboard = () => {
     }
   };
 
-  const deletePost = async()=>{
+  const deletePost = async(post_id : string)=>{
     try{
-      const res
-    }catch(err){
+      const response = await clientServer.delete("/delete_post",{
+        data : {post_id}
+      });
+      getAllPost(); 
+    }catch(err :any){
       alert(err.message)
     }
   }
@@ -115,7 +118,9 @@ const Dashboard = () => {
               posts.map((post) => {
                 return (
                   <div key={post._id}>
-                    <button>Delete</button>
+                    <button onClick={()=>{
+                      deletePost(post._id)
+                    }}>Delete</button>
                     <img
                       className={styles.postIMage}
                       src={`${BASE_URL}/${post.media}`}
