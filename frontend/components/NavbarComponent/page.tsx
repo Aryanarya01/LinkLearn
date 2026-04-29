@@ -3,12 +3,12 @@ import styles from "./page.module.css"
 const NavbarComponent = () => {
   return (
     <div> 
-        <nav>
-          <h1>LinkLearn</h1>
+        <nav className={styles.Navbar}>
+          <h2>LinkLearn</h2>
 
-          <div>
-            <h2>Profile</h2>
-            <h2>Logout</h2>
+          <div className={styles.authThing}>
+            <h3>Profile</h3>
+            <h3>Logout</h3>
           </div>
         </nav>
     </div>
