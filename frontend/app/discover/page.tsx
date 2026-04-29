@@ -36,6 +36,8 @@ const Discover = () => {
                     <div className={styles.Profile} key={profile._id}>
                         <img src={`${BASE_URL}/${profile.userId?.profilePicture}`} alt="" />
                         <h3>{profile.userId?.name}</h3>
+
+                        <p>{profile.userId?.username}</p>
                     </div>
                 )
             })
