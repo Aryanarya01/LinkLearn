@@ -79,6 +79,14 @@ const Dashboard = () => {
     }
   };
 
+  const commentPost = async ()=>{
+    try{
+      
+    }catch(err:any){
+      alert(err.message);
+    }
+  }
+
   return (
     <UserLayout>
       <DashboardLayout>
@@ -130,6 +138,7 @@ const Dashboard = () => {
                       src={`${BASE_URL}/${post.media}`}
                       alt=""
                     />
+                    <p >comment</p>
                     <h2>{post.body}</h2>
                   </div>
                 );
