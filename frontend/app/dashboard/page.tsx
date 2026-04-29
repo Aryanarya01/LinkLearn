@@ -79,9 +79,21 @@ const Dashboard = () => {
     }
   };
 
-  const commentPost = async ()=>{
+  const getAllComment = async()=>{
     try{
-      
+
+    }catch(err:any){
+      alert(err.message)
+    }
+  }
+
+  const commentPost = async ()=>{
+    try{ 
+      const response = await clientServer.post("/comment_post",{
+        data : {
+
+        }
+      })
     }catch(err:any){
       alert(err.message);
     }
