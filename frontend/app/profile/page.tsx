@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { clientServer } from '../config/page'
 
 const Profile = () => {
@@ -13,9 +13,14 @@ const profileFetched = async()=>{
     alert(err.message)
   }
 }
+useEffect(()=>{
+  profileFetched()
+},[])
 
   return (
-    <div>Profile</div>
+    <div className={}>
+
+    </div>
   )
 }
 
