@@ -40,11 +40,15 @@ const Dashboard = () => {
          formData.append("media",fileContent)
        }
        
-        const response = await clientServer.post("/post",formData)
+        const response = await clientServer.post("/post",formData,{
+          headers: {
+    "Content-Type": "multipart/form-data",
+  },
+        })
         console.log(response);
         
         alert("post created")
-        setFileContent("");
+        setPostContent("");
         setFileContent(null)
     }catch(err){
         console.log(err);
