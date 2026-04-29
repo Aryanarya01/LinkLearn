@@ -6,7 +6,7 @@ import styles from "./page.module.css"
 import UserLayout from '../userLayout/page'
 import DashboardLayout from '../dashboardLayout/page'
 const Profile = () => {
-const [profile, setProfile] = useState({});
+const [profile, setProfile] = useState<any>(null);
 const [posts,setPosts]= useState([])
 
 const profileFetched = async()=>{
@@ -21,14 +21,21 @@ const profileFetched = async()=>{
 const allPosts = async()=>{
   try{
     const response = await clientServer.get("/posts");
-
+    const userProfile = response.data.posts; 
+    const mainUser = userProfile.filter((p)=>p.userId?._id === profile?.userId?._id)
+      setPosts(mainUser);
+   
   }catch(err : any){
     alert(err.message)
   }
 }
 useEffect(()=>{
-  profileFetched()
+  profileFetched();
+  
 },[])
+useEffect(()=>{
+  allPosts()
+},[profile])
 
   return (
       <UserLayout>
@@ -46,8 +53,23 @@ useEffect(()=>{
             <p>{profile.userId.username}</p>
             <p>{profile.bio}</p>
             <div className={styles.recent_container}>
-
+              <h2>Recent Activity</h2>
+                {posts.length > 0 ? 
+                  posts.map((post)=>{
+                    return(
+                      <div  key={post._id}>
+                        <img src={`${BASE_URL}/${post?.media}`} />
+                        <p>{post.body}</p>
+                      </div>
+                    )
+                  })
+                  : <p>No Posts</p>
+                }
             </div>
+
+
+
+            div.
           </div>
 
 

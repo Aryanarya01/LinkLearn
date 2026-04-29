@@ -23,6 +23,10 @@
     bottom: -30%;
     left: 8%;
 }
-.recent_container{
+.info_Container{
     
+}
+.recent_container img{
+    width: 7rem;
+    height: 7rem;
 }
