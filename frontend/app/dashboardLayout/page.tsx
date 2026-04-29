@@ -35,7 +35,7 @@ const DashboardLayout = ({children}:any) => {
                     router.push("/discover")
                 }}>Discover</h2>
                 <h2 onClick={()=>{
-                    router.push("/my_connections")
+                    router.push("/my_connection")
                 }}>My Connection</h2>
             </div>
             <div className={styles.mainContainer}>{children}</div>
