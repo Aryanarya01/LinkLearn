@@ -17,6 +17,11 @@ const Dashboard = () => {
       getAboutUser();
     }
   }, []);
+
+  useEffect(()=>{
+      getAllPost();
+  },[])
+
   const { user, setUser } = useUser();
   const [post, setPosts] = useState([]);
   const [postContent, setPostContent] = useState("");
@@ -30,6 +35,15 @@ const Dashboard = () => {
       alert(err.message);
     }
   };
+
+  const getAllPost = async()=>{
+    try{
+      const response = await clientServer.get("/posts");
+      setPosts(response.data);
+    }catch(err:any){
+      alert(err.message)
+    }
+  }
 
   const createPost = async ()=>{
     try{
@@ -78,7 +92,10 @@ const Dashboard = () => {
             }}>Post</button>
           </div>
 
-          <div className="Main_Feed_Container"></div>
+          <div className="Main_Feed_Container">
+
+            
+          </div>
         </div>
       </DashboardLayout>
     </UserLayout>
