@@ -9,6 +9,11 @@ import { useUser } from "../context/page";
 
 const Dashboard = () => {
   const route = useRouter();
+  const { user, setUser } = useUser();
+  const [posts, setPosts] = useState([]);
+  const [postContent, setPostContent] = useState("");
+  const [fileContent, setFileContent] = useState<File | null>(null)
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -19,14 +24,11 @@ const Dashboard = () => {
   }, []);
 
   useEffect(()=>{
-      getAllPost();
-  },[])
+     getAllPost();
+  },[posts])
+   
 
-  const { user, setUser } = useUser();
-  const [post, setPosts] = useState([]);
-  const [postContent, setPostContent] = useState("");
-  const [fileContent, setFileContent] = useState<File | null>(null)
-
+   
   const getAboutUser = async () => {
     try {
       const response = await clientServer.get("/get_user_and_Profile");
@@ -39,7 +41,7 @@ const Dashboard = () => {
   const getAllPost = async()=>{
     try{
       const response = await clientServer.get("/posts");
-      setPosts(response.data);
+      setPosts(response.data.posts);
     }catch(err:any){
       alert(err.message)
     }
@@ -94,7 +96,16 @@ const Dashboard = () => {
 
           <div className="Main_Feed_Container">
 
-            
+              {posts.length > 0 ? ( 
+                posts.map((post)=>{
+                  return(
+                    <div key={post._id}>
+                      <img  src={`${BASE_URL}/${post.media}`} alt="" />
+                        <h2>{post.body}</h2>
+                    </div>
+                  )
+                })
+              ):(<p>No posts</p>)}
           </div>
         </div>
       </DashboardLayout>
