@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { clientServer } from '../config/page'
-
+import styles from "./page.module.css"
 const Profile = () => {
 const [profile, setProfile] = useState("")
 const profileFetched = async()=>{
@@ -18,7 +18,7 @@ useEffect(()=>{
 },[])
 
   return (
-    <div className={}>
+    <div className={styles.main_container}>
 
     </div>
   )
