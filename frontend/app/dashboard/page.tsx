@@ -169,11 +169,18 @@ const Dashboard = () => {
                     >
                       comment
                     </p>
-                    {isModalOpen && (
+                    {isModalOpen && selectedPostId === post._id && (
                       <div>
                         {comments.length > 0 &&
                           comments.map((comment) => {
-                            return <p>{comment.body}</p>;
+                            
+                            return (
+                              
+                            <div key={comment._id}>
+                              <p>{post.userId.username}</p>
+                              <p>{comment.body}</p>
+                            </div>
+                            )
                           })}
 
                         <input
@@ -185,6 +192,9 @@ const Dashboard = () => {
                         <button onClick={commentPost}>send</button>
                       </div>
                     )}
+
+                    
+                     
                     <h2>{post.body}</h2>
                   </div>
                 );
