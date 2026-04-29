@@ -28,7 +28,9 @@ const DashboardLayout = ({children}:any) => {
     <div>
         <div className={styles.container}>
             <div className={styles.left_container}>
-                <h2>Scrool</h2>
+                <h2 onClick={()=>{
+                    router.push("/dashboard")
+                }}>Scrool</h2>
                 <h2 onClick={()=>{
                     router.push("/discover")
                 }}>Discover</h2>
