@@ -287,3 +287,7 @@ export const acceptConnectionRequest = async(req,res)=>{
   }
 }
 
+
+export const getUserProfileBasedOnUsername = async(req,res)=>{
+  try
+}
