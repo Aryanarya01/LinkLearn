@@ -6,6 +6,7 @@ import PDFDocument from "pdfkit";
 import jwt from "jsonwebtoken";
 import fs from "fs";
 import Connection from "../models/connection.model.js";
+import { profile } from "console";
 
 const convertProfileToPdf = async (data) => {
   const doc = new PDFDocument();
@@ -296,7 +297,8 @@ export const getUserProfileBasedOnUsername = async(req,res)=>{
     if(!user){
       return res.status(404).json({message : "User not found"});
     }
-    
+    const userProfile = await Profile.findOne({userId : user._id}).populate("userId","name email username profilePicture");
+    return res.json({profile : userProfile})
   }catch(err){
     return res.status(500).json({message : err.message})
   }
