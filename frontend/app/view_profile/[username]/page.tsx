@@ -58,8 +58,8 @@ const viewProfile = () => {
                 <h2>{profile.userId.name}</h2>
                 <p>{profile.userId.username}</p>
                 <button onClick={async()=>{
-                    const response = await clientServer.get(`/user/download_resume?=${profile.userId._id}`);
-                    window.open(``)
+                    const response = await clientServer.get(`/user/download_resume?id=${profile.userId._id}`);
+                    window.open(`${BASE_URL}/${response.data.message}`,"_blank")
                 }}>Download</button>
                 <p>{profile.bio}</p>
                 <div className={styles.recent_container}>

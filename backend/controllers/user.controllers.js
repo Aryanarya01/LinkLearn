@@ -179,8 +179,8 @@ export const getAllUserProfile = async (req, res) => {
 
 export const downloadProfile = async (req, res) => {
   try {
-    const Id = req.user.id;
-    const profile = await Profile.findOne({ userId: Id }).populate(
+    const {id} = req.query;
+    const profile = await Profile.findOne({ userId:id }).populate(
       "userId",
       "name email username profilePicture",
     );
