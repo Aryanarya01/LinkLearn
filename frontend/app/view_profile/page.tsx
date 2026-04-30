@@ -1,6 +1,7 @@
 import React from 'react'
 import UserLayout from '../userLayout/page'
-
+import DashboardLayout from '../dashboardLayout/page'
+import styles from "./page.module.css"
 const viewProfile = () => {
   return (
     <UserLayout>
