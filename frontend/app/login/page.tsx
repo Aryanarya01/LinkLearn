@@ -121,7 +121,7 @@ const Login = () => {
           </button>
         </div>
 
-        <div>{userLoginMethod ? <p>Don't have a account? <button onClick={()=>}>SignUp</button></p>: <p>Already Have an account? <button>SignIn</button></p>}</div>
+        <div>{userLoginMethod ? <p>Don't have a account? <button onClick={()=>setUserLoginMethod(false)}>SignUp</button></p>: <p>Already Have an account? <button onClick={()=>setUserLoginMethod(true)}>SignIn</button></p>}</div>
       </div>
     </div>
        
