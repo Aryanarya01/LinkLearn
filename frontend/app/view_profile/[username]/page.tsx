@@ -9,7 +9,7 @@ const viewProfile = () => {
   const  {username} = useParams()
   const [profile, setProfile] = useState<any>(null);
   const [posts, setPosts] = useState([]);
-  const [isConnectedUser,setIsConnectedUser] = useState(false);
+  const [isUserInConnection,setIsUserInConnection] = useState(false);
   const [isConnetionNull,setIsConnectionNull] = useState(true)
   const profileFetched = async () => {
     try {
@@ -40,7 +40,17 @@ const viewProfile = () => {
       alert(err.message);
     }
   };
- 
+  
+
+  const sendConnectionRequest = async()=>{
+    try{
+
+    }catch(err : any){
+      alert(err.message)
+    }
+  }
+
+
   useEffect(() => {
     allPosts();
   }, [profile]);
@@ -63,10 +73,17 @@ const viewProfile = () => {
                     window.open(`${BASE_URL}/${response.data.message}`,"_blank")
                 }}>Download</button>
                 <p>{profile.bio}</p>
+
+
+                  {isUserInConnection ? 
+                  
+                    <button>{isConnetionNull ? "Pending" : "Connected"}</button>
+                  :
+
                   <button onClick={()=>{
 
-                  }}>connect</button>
-
+                  }}>connect</button> 
+                }
                 <div className={styles.recent_container}>
                   <h2>Recent Activity</h2>
                   {posts.length > 0 ? (
