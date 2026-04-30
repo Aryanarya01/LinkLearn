@@ -38,6 +38,15 @@ useEffect(()=>{
   allPosts()
 },[profile])
 
+
+  const handelInputChange = async()=>{
+    try{
+
+    }catch(err){
+      
+    }
+  }
+
   return (
       <UserLayout>
         <DashboardLayout>
