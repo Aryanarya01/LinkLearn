@@ -101,9 +101,9 @@ useEffect(()=>{
               <h2>Work History</h2>
               <div>
                 {
-                  profile.pastWork.map((work)=>{
+                  profile.pastWork.map((work,index)=>{
                     return (
-                      <div key={work._id}>
+                      <div key={index}>
                         <p> {work.company}--
                         {work.position}</p>
                         <p>{work.years}</p>
@@ -137,9 +137,9 @@ useEffect(()=>{
                     )}
             </div>
                     {profile &&
-                   <div onClick={()=>updateProfileData()}>
+                   <button onClick={()=>updateProfileData()}>
                     Update Profile
-                   </div>
+                   </button>
 }
 
                 <div className={styles.Education_section}>
