@@ -33,11 +33,11 @@ const Discover = () => {
       <DashboardLayout>
         <div>
           <h1>Discover</h1>
-          {profiles && 
+          {profiles.length > 0 &&
             profiles.map((profile)=>{
                 return(
                     <div onClick={()=>{
-                        router.push(`view_profile/${profile.userId.username}`)
+                        router.push(`/view_profile/${profile.userId?.username}`)
                     }} className={styles.Profile} key={profile._id}>
                         <img src={`${BASE_URL}/${profile.userId?.profilePicture}`} alt="" />
                         <h3>{profile.userId?.name}</h3>
