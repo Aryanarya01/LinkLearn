@@ -42,6 +42,7 @@ useEffect(()=>{
       <UserLayout>
         <DashboardLayout>
           <div >
+
        {profile && profile.userId &&
         <div className={styles.main_container}>
 
@@ -72,18 +73,38 @@ useEffect(()=>{
 
             <div className={styles.Work_section}>
               <h2>Work History</h2>
-              { 
-                profile.pastWork.map((work)=>{
-                  return (
-                    <div key={work._id}>
-                      <p> {work.company}--
-                      {work.position}</p>
-                      <p>{work.years}</p>
+              <div>
+                {
+                  profile.pastWork.map((work)=>{
+                    return (
+                      <div key={work._id}>
+                        <p> {work.company}--
+                        {work.position}</p>
+                        <p>{work.years}</p>
+                      </div>
+                    )
+                
+                  })
+                }
+                <button onClick={()=>{
+                  setIsModalOpen(true)
+                }}>Add Work</button>
+              </div>
 
-                    </div>
-                  )
-                })
-              }
+
+                    {isModalOpen && (
+                      <div className={styles.BackDiv} onClick={()=>{
+                        setIsModalOpen(false)
+                      }}>
+                        <div onClick={(e)=>{
+                          e.stopPropagation()
+                        }} className={styles.modalOpen}>
+                            <input type="text" placeholder='enter company' />
+                            <input type="text" placeholder='enter position'/>
+                            <input type="text"placeholder='enter years'/>
+                        </div>
+                      </div>
+                    )}
             </div>
 
                 <div className={styles.Education_section}>
@@ -100,12 +121,8 @@ useEffect(()=>{
                   }
                 </div>
 
-
-
           </div>
-
-
-        </div>
+       </div>
        }
      </div>
         </DashboardLayout>
