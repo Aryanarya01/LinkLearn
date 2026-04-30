@@ -7,7 +7,8 @@ import UserLayout from '../userLayout/page'
 import DashboardLayout from '../dashboardLayout/page'
 const Profile = () => {
 const [profile, setProfile] = useState<any>(null);
-const [posts,setPosts]= useState([])
+const [posts,setPosts]= useState([]);
+const [isModalOpen,setIsModalOpen] = useState(false)
 
 const profileFetched = async()=>{
   try{
