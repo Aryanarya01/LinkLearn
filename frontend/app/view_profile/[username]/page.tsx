@@ -42,12 +42,14 @@ const viewProfile = () => {
   };
   
 
-  const sendConnectionRequest = async()=>{
-    try{
-
-    }catch(err : any){
-      alert(err.message)
-    }
+    const sendConnectionRequest = async()=>{
+      try{
+          const response = await clientServer.post("/user/send_connection_request",{
+            connectionId : profile.userId?._id
+          })
+      }catch(err : any){
+        alert(err.message)
+      }
   }
 
 
