@@ -4,10 +4,9 @@ import UserLayout from "../../userLayout/page";
 import DashboardLayout from "../../dashboardLayout/page";
 import styles from "../page.module.css"
 import { BASE_URL, clientServer } from "../../config/page";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 const viewProfile = () => {
   const  {username} = useParams()
-  const router = useRouter();
   const [profile, setProfile] = useState<any>(null);
   const [posts, setPosts] = useState([]);
 
@@ -58,8 +57,9 @@ const viewProfile = () => {
               <div className={styles.info_Container}>
                 <h2>{profile.userId.name}</h2>
                 <p>{profile.userId.username}</p>
-                <button onClick={()=>{
-                  rou
+                <button onClick={async()=>{
+                    const response = await clientServer.get(`/user/download_resume?=${profile.userId._id}`);
+                    window.open(``)
                 }}>Download</button>
                 <p>{profile.bio}</p>
                 <div className={styles.recent_container}>
