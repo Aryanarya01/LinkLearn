@@ -12,7 +12,7 @@ const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [userLoginMethod, setUserLoginMethod] = useState<boolean>(true);
+  const [userLoginMethod, setUserLoginMethod] = useState<boolean>(false);
   const {setUser} = useUser()
   useEffect(()=>{
     if(localStorage.getItem("token")){
@@ -121,7 +121,7 @@ const Login = () => {
           </button>
         </div>
 
-        <div>{userLoginMethod ? <p>Don't have a account? <button>SignUp</button></p>: <p>Already Have an account? <button>SignIn</button></p>}</div>
+        <div>{userLoginMethod ? <p>Don't have a account? <button onClick={()=>}>SignUp</button></p>: <p>Already Have an account? <button>SignIn</button></p>}</div>
       </div>
     </div>
        
