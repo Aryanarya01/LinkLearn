@@ -22,6 +22,8 @@ const Discover = () => {
     }
   };
 
+
+  
   useEffect(()=>{
     getAllProfile()
   },[])
