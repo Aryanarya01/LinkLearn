@@ -31,7 +31,7 @@ const profileFetched = async()=>{
 const updateProfileData = async()=>{
     await Promise.all([
         clientServer.post("/user_update",{
-          name : profile.userId?._id,
+          name : profile.userId?.name,
         }),
 
         clientServer.post("/update_profile_data",{
@@ -136,6 +136,11 @@ useEffect(()=>{
                       </div>
                     )}
             </div>
+                    {profile &&
+                   <div onClick={()=>updateProfileData()}>
+                    Update Profile
+                   </div>
+}
 
                 <div className={styles.Education_section}>
                   <h2>Education</h2>
