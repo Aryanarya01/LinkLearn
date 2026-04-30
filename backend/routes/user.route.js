@@ -1,5 +1,5 @@
 import {Router} from "express"
-import { acceptConnectionRequest, downloadProfile, getAllUserProfile, getMyConnections, getUserAndProfile, login, register, sendConnectionRequest, updateProfileData, updateUserProfile, uploadUserProfile, whatAreMyConnections } from "../controllers/user.controllers.js";
+import { acceptConnectionRequest, downloadProfile, getAllUserProfile, getMyConnections, getUserAndProfile, getUserProfileBasedOnUsername, login, register, sendConnectionRequest, updateProfileData, updateUserProfile, uploadUserProfile, whatAreMyConnections } from "../controllers/user.controllers.js";
 import { Protect } from "../middleware/protect.js";
 import multer from "multer"
  
@@ -29,5 +29,5 @@ router.route("/user/send_connection_request").post(Protect,sendConnectionRequest
 router.route("/user/get_my_connection").get(Protect,getMyConnections);
 router.route("/user/what_are_my_connection").get(Protect,whatAreMyConnections);
 router.route("/user/accept_connection").post(Protect,acceptConnectionRequest);
-
+router.route("/user/get_profile_based_on_username").get(Protect,getUserProfileBasedOnUsername)
 export default router;
