@@ -1,8 +1,41 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import UserLayout from '../userLayout/page'
 import DashboardLayout from '../dashboardLayout/page'
 import styles from "./page.module.css"
 const viewProfile = () => {
+
+const [profile, setProfile] = useState<any>(null);
+const [posts,setPosts]= useState([])
+
+const profileFetched = async()=>{
+  try{
+      const response = await clientServer.get("/get_user_and_Profile");
+      setProfile(response.data);
+  }catch(err : any){
+    alert(err.message)
+  }
+}
+
+const allPosts = async()=>{
+  try{
+    const response = await clientServer.get("/posts");
+    const userProfile = response.data.posts; 
+    const mainUser = userProfile.filter((p)=>p.userId?._id === profile?.userId?._id)
+      setPosts(mainUser);
+   
+  }catch(err : any){
+    alert(err.message)
+  }
+}
+useEffect(()=>{
+  profileFetched();
+  
+},[])
+useEffect(()=>{
+  allPosts()
+},[profile])
+
   return (
     <UserLayout>
         <DashboardLayout>
