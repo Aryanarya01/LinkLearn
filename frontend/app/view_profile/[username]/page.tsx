@@ -62,6 +62,10 @@ const viewProfile = () => {
                     window.open(`${BASE_URL}/${response.data.message}`,"_blank")
                 }}>Download</button>
                 <p>{profile.bio}</p>
+                  <button onClick={()=>{
+                    
+                  }}>connect</button>
+
                 <div className={styles.recent_container}>
                   <h2>Recent Activity</h2>
                   {posts.length > 0 ? (
