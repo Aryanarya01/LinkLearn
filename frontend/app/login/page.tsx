@@ -121,7 +121,7 @@ const Login = () => {
           </button>
         </div>
 
-        <div>{userLoginMethod ? <p>Don't have a account? <button>SignUp</button></p>: <p>Already Have an account? <button>SignIN</button></p>}</div>
+        <div>{userLoginMethod ? <p>Don't have a account? <button>SignUp</button></p>: <p>Already Have an account? <button>SignIn</button></p>}</div>
       </div>
     </div>
        
