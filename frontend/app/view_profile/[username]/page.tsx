@@ -83,7 +83,7 @@ const viewProfile = () => {
                   :
 
                   <button onClick={()=>{
-
+                    sendConnectionRequest()
                   }}>connect</button> 
                 }
                 <div className={styles.recent_container}>
