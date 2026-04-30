@@ -29,12 +29,16 @@ const page = () => {
                 <div>
                     <h4>My Network</h4>
 
-                {myConnections ? 
-                    <div>
-                        <img src={`${BASE_URL}/${myConnections.userId?.profilePicture}`} />
-                        <h3>{myConnections.userId?.name}</h3>
+                {myConnections.length > 0 ? (
+                    myConnections.map((connec)=>(
+                        <div key={connec._id}>
+                        <img style={{width : "7rem",borderRadius : "50%"}} src={`${BASE_URL}/${connec.userId?.profilePicture}`} />
+                        <h3>{connec.userId?.name}</h3>
+                        <p>{connec.userId.username}</p>
                     </div>
-                : <h2>No Connection</h2>}
+                    )
+                     
+               ) ): <h2>No Connection</h2>}
 
                 </div>
                 
