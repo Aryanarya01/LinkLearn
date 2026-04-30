@@ -9,7 +9,8 @@ const viewProfile = () => {
   const  {username} = useParams()
   const [profile, setProfile] = useState<any>(null);
   const [posts, setPosts] = useState([]);
-
+  const [isConnectedUser,setIsConnectedUser] = useState(false);
+  const [isConnetionNull,setIsConnectionNull] = useState(true)
   const profileFetched = async () => {
     try {
       const response = await clientServer.get("/user/get_profile_based_on_username",{
@@ -63,7 +64,7 @@ const viewProfile = () => {
                 }}>Download</button>
                 <p>{profile.bio}</p>
                   <button onClick={()=>{
-                    
+
                   }}>connect</button>
 
                 <div className={styles.recent_container}>
