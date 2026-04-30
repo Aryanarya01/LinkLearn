@@ -15,7 +15,7 @@ const [workInput,setWorkInput] = useState({
   years : "",
 })
 
-const handelWorkInputChange = async(e)=>{
+const handelWorkInputChange = async(e : any)=>{
   const {name,value} = e.target;
   setWorkInput({...workInput,[name] : value})
 }
@@ -26,6 +26,18 @@ const profileFetched = async()=>{
   }catch(err : any){
     alert(err.message)
   }
+}
+
+const updateProfileData = async()=>{
+    await Promise.all([
+        clientServer.post("/user_update",{
+          name : profile.userId?._id,
+        }),
+
+        clientServer.post("/update_profile_data",{
+          
+        })
+    ])
 }
 
 const allPosts = async()=>{
@@ -111,9 +123,13 @@ useEffect(()=>{
                         <div onClick={(e)=>{
                           e.stopPropagation()
                         }} className={styles.modalOpen}>
-                            <input name='company' type="text" placeholder='enter company' />
-                            <input name='position' type="text" placeholder='enter position'/>
-                            <input name='years' type="text"placeholder='enter years'/>
+                            <input name='company' type="text" placeholder='enter company' onChange={handelWorkInputChange} />
+                            <input name='position' type="text" placeholder='enter position' onChange={handelWorkInputChange}/>
+                            <input name='years' type="text"placeholder='enter years' onChange={handelWorkInputChange}/>
+                            <button onClick={()=>{
+                              setProfile({...profile,pastWork : [...profile.pastWork,workInput]})
+                              setIsModalOpen(false)
+                            }}>Add</button>
                         </div>
                       </div>
                     )}
