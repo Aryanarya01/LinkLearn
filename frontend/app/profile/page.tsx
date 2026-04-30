@@ -9,7 +9,16 @@ const Profile = () => {
 const [profile, setProfile] = useState<any>(null);
 const [posts,setPosts]= useState([]);
 const [isModalOpen,setIsModalOpen] = useState(false)
+const [workInput,setWorkInput] = useState({
+  company : "",
+  position : "",
+  years : "",
+})
 
+const handelWorkInputChange = async(e)=>{
+  const {name,value} = e.target;
+  setWorkInput({...workInput,[name] : value})
+}
 const profileFetched = async()=>{
   try{
       const response = await clientServer.get("/get_user_and_Profile");
@@ -39,13 +48,7 @@ useEffect(()=>{
 },[profile])
 
 
-  const handelInputChange = async()=>{
-    try{
 
-    }catch(err){
-      
-    }
-  }
 
   return (
       <UserLayout>
@@ -108,9 +111,9 @@ useEffect(()=>{
                         <div onClick={(e)=>{
                           e.stopPropagation()
                         }} className={styles.modalOpen}>
-                            <input type="text" placeholder='enter company' />
-                            <input type="text" placeholder='enter position'/>
-                            <input type="text"placeholder='enter years'/>
+                            <input name='company' type="text" placeholder='enter company' />
+                            <input name='position' type="text" placeholder='enter position'/>
+                            <input name='years' type="text"placeholder='enter years'/>
                         </div>
                       </div>
                     )}
