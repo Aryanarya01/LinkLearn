@@ -35,7 +35,9 @@ const updateProfileData = async()=>{
         }),
 
         clientServer.post("/update_profile_data",{
-          
+            bio : profile.bio,
+            pastWork : profile.pastWork,
+            education : profile.education,
         })
     ])
 }
