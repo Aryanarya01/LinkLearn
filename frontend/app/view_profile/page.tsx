@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import UserLayout from '../userLayout/page'
 import DashboardLayout from '../dashboardLayout/page'
 import styles from "./page.module.css"
+import { BASE_URL, clientServer } from '../config/page'
 const viewProfile = () => {
 
 const [profile, setProfile] = useState<any>(null);
