@@ -18,6 +18,12 @@ const page = () => {
         }
     }
 
+    const accept_connection = async()=>{
+        try{
+            
+        }
+    }
+
     useEffect(()=>{
         whatAreMyConnections()
     },[])
@@ -35,8 +41,10 @@ const page = () => {
                         <img style={{width : "7rem",borderRadius : "50%"}} src={`${BASE_URL}/${connec.userId?.profilePicture}`} />
                         <h3>{connec.userId?.name}</h3>
                         <p>{connec.userId.username}</p>
-                    </div>
+                        <button>accept</button>
+                        </div>
                     )
+
                      
                ) ): <h2>No Connection</h2>}
 
