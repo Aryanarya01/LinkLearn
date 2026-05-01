@@ -20,7 +20,9 @@ const page = () => {
 
     const accept_connection = async()=>{
         try{
-            
+
+        }catch(err:any){
+            alert(err.message)
         }
     }
 
