@@ -92,15 +92,13 @@ const viewProfile = () => {
                 <p>{profile.bio}</p>
 
 
-                  {isUserInConnection ? 
-                  
-                    <button>{isConnetionNull ? "Pending" : "Connected"}</button>
-                  :
-
-                  <button onClick={()=>{
-                    sendConnectionRequest(),
-                    setIsUserInConnection(true)
-                  }}>connect</button> 
+                  {isUserInConnection ? (
+  <button disabled>
+    {isConnetionNull ? "Pending" : "Connected"}
+  </button>
+) : (
+  <button onClick={sendConnectionRequest}>Connect</button>
+)}
                 }
                 <div className={styles.recent_container}>
                   <h2>Recent Activity</h2>
