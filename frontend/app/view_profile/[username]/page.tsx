@@ -47,6 +47,7 @@ const viewProfile = () => {
           const response = await clientServer.post("/user/send_connection_request",{
             connectionId : profile.userId?._id
           })
+          setIsUserInConnection(true)
       }catch(err : any){
         alert(err.message)
       }
@@ -55,7 +56,7 @@ const viewProfile = () => {
       const whatAreMyConnections = async()=>{
           try{
               const response = await clientServer.get("/user/what_are_my_connection");
-              setMyConnections(response.data.myConnection)
+              whatAreMyConnections(response.data.myConnection)
           }catch(err : any){
               alert(err.message)
           }
