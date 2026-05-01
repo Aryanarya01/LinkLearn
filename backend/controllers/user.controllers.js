@@ -248,45 +248,77 @@ export const getMyConnections = async (req, res) => {
 export const whatAreMyConnections = async (req, res) => {
   try {
     const Id = req.user.id;
+
     const user = await User.findById(Id);
     if (!user) {
       return res.status(404).json({ message: "User not found!" });
     }
+
     const myConnection = await Connection.find({
-      connectionId: Id,
-    }).populate("userId", "name email username profilePicture");
+      $or: [
+        { userId: Id },
+        { connectionId: Id }
+      ]
+    })
+      .populate("userId", "name email username profilePicture")
+      .populate("connectionId", "name email username profilePicture");
+
     return res.status(200).json({ myConnection });
+
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 };
 
-
-export const acceptConnectionRequest = async(req,res)=>{
-  try{
-    const Id = req.user.id;
-    const {requestId,action_type} = req.body;
-    const user = await User.findById(Id);
-    if(!user){
-      return res.status(404).json({message : "User not found!"});
-    }
-    const isConnection = await Connection.findOne({_id : requestId});
-    if(!isConnection){
-      return res.status(404).json({message : "Connection not found!"});
-    }
+// export const acceptConnectionRequest = async(req,res)=>{
+//   try{
+//     const Id = req.user.id;
+//     const {requestId,action_type} = req.body;
+//     const user = await User.findById(Id);
+//     if(!user){
+//       return res.status(404).json({message : "User not found!"});
+//     }
+//     const isConnection = await Connection.findOne({_id : requestId});
+//     if(!isConnection){
+//       return res.status(404).json({message : "Connection not found!"});
+//     }
     
-    if(isConnection.action_type === "accept"){
-      isConnection.status_accepted = true;
-    }else{
-      isConnection.status_accepted = false;
-    }
-    await isConnection.save()
-   return res.status(200).json({message : "Request Accepted!"})
+//     if(isConnection.action_type === "accept"){
+//       isConnection.status_accepted = true;
+//     }else{
+//       isConnection.status_accepted = false;
+//     }
+//     await isConnection.save()
+//    return res.status(200).json({message : "Request Accepted!"})
 
-  }catch(err){
-    return res.status(500).json({message : err.message})
+//   }catch(err){
+//     return res.status(500).json({message : err.message})
+//   }
+// }
+
+export const acceptConnectionRequest = async (req, res) => {
+  try {
+    const Id = req.user.id;
+    const { requestId, action_type } = req.body;
+
+    const isConnection = await Connection.findById(requestId);
+    if (!isConnection) {
+      return res.status(404).json({ message: "Connection not found!" });
+    }
+
+    // 🔥 direct set kar
+    if (action_type === "accept") {
+      isConnection.status_accepted = true;
+    }
+
+    await isConnection.save();
+
+    return res.status(200).json({ message: "Accepted!" });
+
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
   }
-}
+};
 
 
 export const getUserProfileBasedOnUsername = async(req,res)=>{

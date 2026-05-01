@@ -53,18 +53,30 @@ const viewProfile = () => {
       }
   }
 
-      const whatAreMyConnections = async()=>{
-          try{
-              const response = await clientServer.get("/user/what_are_my_connection");
-              whatAreMyConnections(response.data.myConnection)
-          }catch(err : any){
-              alert(err.message)
-          }
-      }
+const checkIfConnected = async () => {
+  try {
+    const response = await clientServer.get("/user/what_are_my_connection");
 
-  useEffect(() => {
+    const found = response.data.myConnection.find((connect) =>
+      connect.userId?._id === profile.userId?._id ||
+      connect.connectionId?._id === profile.userId?._id
+    );
+
+    if (found) {
+      setIsUserInConnection(true);
+      setIsConnectionNull(!found.status_accepted);
+    } else {
+      setIsUserInConnection(false);
+    }
+
+  } catch (err: any) {
+    alert(err.message);
+  }
+};
+
+      useEffect(() => {
   if (profile?.userId?._id) {
-    whatAreMyConnections();
+    checkIfConnected();
   }
 }, [profile]);
 
@@ -93,13 +105,13 @@ const viewProfile = () => {
 
 
                   {isUserInConnection ? (
-  <button disabled>
+  <button >
     {isConnetionNull ? "Pending" : "Connected"}
   </button>
 ) : (
   <button onClick={sendConnectionRequest}>Connect</button>
 )}
-                }
+                
                 <div className={styles.recent_container}>
                   <h2>Recent Activity</h2>
                   {posts.length > 0 ? (
