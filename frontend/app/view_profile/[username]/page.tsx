@@ -2,31 +2,33 @@
 import React, { useEffect, useState } from "react";
 import UserLayout from "../../userLayout/page";
 import DashboardLayout from "../../dashboardLayout/page";
-import styles from "../page.module.css"
+import styles from "../page.module.css";
 import { BASE_URL, clientServer } from "../../config/page";
 import { useParams } from "next/navigation";
 const viewProfile = () => {
-  const  {username} = useParams()
+  const { username } = useParams();
   const [profile, setProfile] = useState<any>(null);
   const [posts, setPosts] = useState([]);
-  const [isUserInConnection,setIsUserInConnection] = useState(false);
-  const [isConnetionNull,setIsConnectionNull] = useState(true)
+  const [isUserInConnection, setIsUserInConnection] = useState(false);
+  const [isConnetionNull, setIsConnectionNull] = useState(true);
   const profileFetched = async () => {
     try {
-      const response = await clientServer.get("/user/get_profile_based_on_username",{
-        params : {username}
-      });
+      const response = await clientServer.get(
+        "/user/get_profile_based_on_username",
+        {
+          params: { username },
+        },
+      );
       setProfile(response.data.profile);
-      
     } catch (err: any) {
       alert(err.message);
     }
   };
-  useEffect(()=>{
-    if(username){
-      profileFetched()
+  useEffect(() => {
+    if (username) {
+      profileFetched();
     }
-  },[username])
+  }, [username]);
 
   const allPosts = async () => {
     try {
@@ -40,45 +42,47 @@ const viewProfile = () => {
       alert(err.message);
     }
   };
-  
 
-    const sendConnectionRequest = async()=>{
-      try{
-          const response = await clientServer.post("/user/send_connection_request",{
-            connectionId : profile.userId?._id
-          })
-          setIsUserInConnection(true)
-      }catch(err : any){
-        alert(err.message)
-      }
-  }
-
-const checkIfConnected = async () => {
-  try {
-    const response = await clientServer.get("/user/what_are_my_connection");
-
-    const found = response.data.myConnection.find((connect) =>
-      connect.userId?._id === profile.userId?._id ||
-      connect.connectionId?._id === profile.userId?._id
-    );
-
-    if (found) {
+  const sendConnectionRequest = async () => {
+    try {
+      const response = await clientServer.post(
+        "/user/send_connection_request",
+        {
+          connectionId: profile.userId?._id,
+        },
+      );
       setIsUserInConnection(true);
-      setIsConnectionNull(!found.status_accepted);
-    } else {
-      setIsUserInConnection(false);
+    } catch (err: any) {
+      alert(err.message);
     }
+  };
 
-  } catch (err: any) {
-    alert(err.message);
-  }
-};
+  const checkIfConnected = async () => {
+    try {
+      const response = await clientServer.get("/user/what_are_my_connection");
 
-      useEffect(() => {
-  if (profile?.userId?._id) {
-    checkIfConnected();
-  }
-}, [profile]);
+      const found = response.data.myConnection.find(
+        (connect) =>
+          connect.userId?._id === profile.userId?._id ||
+          connect.connectionId?._id === profile.userId?._id,
+      );
+
+      if (found) {
+        setIsUserInConnection(true);
+        setIsConnectionNull(!found.status_accepted);
+      } else {
+        setIsUserInConnection(false);
+      }
+    } catch (err: any) {
+      alert(err.message);
+    }
+  };
+
+  useEffect(() => {
+    if (profile?.userId?._id) {
+      checkIfConnected();
+    }
+  }, [profile]);
 
   useEffect(() => {
     allPosts();
@@ -97,21 +101,27 @@ const checkIfConnected = async () => {
               <div className={styles.info_Container}>
                 <h2>{profile.userId.name}</h2>
                 <p>{profile.userId.username}</p>
-                <button onClick={async()=>{
-                    const response = await clientServer.get(`/user/download_resume?id=${profile.userId._id}`);
-                    window.open(`${BASE_URL}/${response.data.message}`,"_blank")
-                }}>Download</button>
+                <button
+                  onClick={async () => {
+                    const response = await clientServer.get(
+                      `/user/download_resume?id=${profile.userId._id}`,
+                    );
+                    window.open(
+                      `${BASE_URL}/${response.data.message}`,
+                      "_blank",
+                    );
+                  }}
+                >
+                  Download
+                </button>
                 <p>{profile.bio}</p>
 
+                {isUserInConnection ? (
+                  <button>{isConnetionNull ? "Pending" : "Connected"}</button>
+                ) : (
+                  <button onClick={sendConnectionRequest}>Connect</button>
+                )}
 
-                  {isUserInConnection ? (
-  <button >
-    {isConnetionNull ? "Pending" : "Connected"}
-  </button>
-) : (
-  <button onClick={sendConnectionRequest}>Connect</button>
-)}
-                
                 <div className={styles.recent_container}>
                   <h2>Recent Activity</h2>
                   {posts.length > 0 ? (
@@ -167,7 +177,3 @@ const checkIfConnected = async () => {
 };
 
 export default viewProfile;
-
-
-
- 
