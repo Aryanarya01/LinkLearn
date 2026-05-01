@@ -52,6 +52,20 @@ const viewProfile = () => {
       }
   }
 
+      const whatAreMyConnections = async()=>{
+          try{
+              const response = await clientServer.get("/user/what_are_my_connection");
+              setMyConnections(response.data.myConnection)
+          }catch(err : any){
+              alert(err.message)
+          }
+      }
+
+  useEffect(() => {
+  if (profile?.userId?._id) {
+    whatAreMyConnections();
+  }
+}, [profile]);
 
   useEffect(() => {
     allPosts();
@@ -83,7 +97,8 @@ const viewProfile = () => {
                   :
 
                   <button onClick={()=>{
-                    sendConnectionRequest()
+                    sendConnectionRequest(),
+                    setIsUserInConnection(true)
                   }}>connect</button> 
                 }
                 <div className={styles.recent_container}>
