@@ -86,8 +86,11 @@ export const login = async (req, res) => {
       sameSite: "lax",
       path: "/",
     });
-    return res.status(200).json({ message: "Login Successfull" , token: token,   // 👈 ADD THIS
-  user: user});
+    return res.status(200).json({
+      message: "Login Successfull",
+      token: token, // 👈 ADD THIS
+      user: user,
+    });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "Server error!" });
@@ -179,8 +182,8 @@ export const getAllUserProfile = async (req, res) => {
 
 export const downloadProfile = async (req, res) => {
   try {
-    const {id} = req.query;
-    const profile = await Profile.findOne({ userId:id }).populate(
+    const { id } = req.query;
+    const profile = await Profile.findOne({ userId: id }).populate(
       "userId",
       "name email username profilePicture",
     );
@@ -255,16 +258,12 @@ export const whatAreMyConnections = async (req, res) => {
     }
 
     const myConnection = await Connection.find({
-      $or: [
-        { userId: Id },
-        { connectionId: Id }
-      ]
+      $or: [{ userId: Id }, { connectionId: Id }],
     })
       .populate("userId", "name email username profilePicture")
       .populate("connectionId", "name email username profilePicture");
 
     return res.status(200).json({ myConnection });
-
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -282,7 +281,7 @@ export const whatAreMyConnections = async (req, res) => {
 //     if(!isConnection){
 //       return res.status(404).json({message : "Connection not found!"});
 //     }
-    
+
 //     if(isConnection.action_type === "accept"){
 //       isConnection.status_accepted = true;
 //     }else{
@@ -314,24 +313,24 @@ export const acceptConnectionRequest = async (req, res) => {
     await isConnection.save();
 
     return res.status(200).json({ message: "Accepted!" });
-
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 };
 
-
-export const getUserProfileBasedOnUsername = async(req,res)=>{
-   const {username} = req.query;
-  try{
-    
-    const user = await User.findOne({username});
-    if(!user){
-      return res.status(404).json({message : "User not found"});
+export const getUserProfileBasedOnUsername = async (req, res) => {
+  const { username } = req.query;
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
-    const userProfile = await Profile.findOne({userId : user._id}).populate("userId","name email username profilePicture");
-    return res.json({profile : userProfile})
-  }catch(err){
-    return res.status(500).json({message : err.message})
+    const userProfile = await Profile.findOne({ userId: user._id }).populate(
+      "userId",
+      "name email username profilePicture",
+    );
+    return res.json({ profile: userProfile });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
   }
-}
+};
