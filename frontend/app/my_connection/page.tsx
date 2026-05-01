@@ -18,9 +18,13 @@ const page = () => {
         }
     }
 
-    const accept_connection = async()=>{
+    const accept_connection = async({requestId,action_type}:any)=>{
         try{
-
+            const response = await clientServer.post("/user/accept_connection",{
+                requestId,
+                action_type
+            })
+             whatAreMyConnections(); 
         }catch(err:any){
             alert(err.message)
         }
@@ -43,7 +47,12 @@ const page = () => {
                         <img style={{width : "7rem",borderRadius : "50%"}} src={`${BASE_URL}/${connec.userId?.profilePicture}`} />
                         <h3>{connec.userId?.name}</h3>
                         <p>{connec.userId.username}</p>
-                        <button>accept</button>
+                        <button onClick={()=>{
+                            accept_connection({
+                                    requestId: connec._id,
+        action_type: "accept"
+                            })
+                        }}>accept</button>
                         </div>
                     )
 
