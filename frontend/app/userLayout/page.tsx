@@ -1,16 +1,15 @@
-"use client"
+"use client";
 
-import NavbarComponent from '@/components/NavbarComponent/page'
-import React from 'react'
+import NavbarComponent from "@/components/NavbarComponent/page";
+import React from "react";
 
-const UserLayout = ({children}:any) => {
+const UserLayout = ({ children }: any) => {
   return (
-         
-           <div>
-            <NavbarComponent/>
-            {children}
-            </div>
-  )
-}
+    <div>
+      <NavbarComponent />
+      {children}
+    </div>
+  );
+};
 
-export default UserLayout
+export default UserLayout;
